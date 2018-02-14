@@ -34,22 +34,6 @@ public class GameClient extends Client implements GameMode
     @Override
     public void process(String s)
     {
-
-        //change mode from server
-        if(s.split(" ")[0].equals("ChangeMode")){
-            switch(s.split(" ")[1]){
-                case("Play"):
-                    Mayflower.setWorld(gameWorld);break;
-                case("Waiting"):
-                    System.out.println("waiting");
-
-            }
-            return;
-        }
-
-
-
-
         List<Actor> actors = new LinkedList<Actor>();
         String[] parts = s.split(":");
         for(String part : parts)

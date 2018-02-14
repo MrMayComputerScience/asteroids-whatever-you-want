@@ -13,7 +13,12 @@ public class Collectable extends Actor
     @Override
     public void act()
     {
-
+        //To-do replace Actor with something else
+        Actor touching = this.getOneIntersectingObject(Actor.class);
+        if(touching!=null)
+        {
+            //
+        }
     }
 
     @Override
