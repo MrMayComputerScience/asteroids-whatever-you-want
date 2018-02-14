@@ -50,12 +50,12 @@ public class ServerGame extends MayflowerHeadless
 
     public void join(int i, String image)
     {
-        Actor actor = new BoxActor(image);
+//        Actor actor = new BoxActor(image);
         int x = 5;//(int)(Math.random() * 700) + 50;
         int y = 5;//(int)(Math.random() * 500) + 50;
-        world.addObject(actor, x, y);
+//        world.addObject(actor, x, y);
 
-        actors.put(i, actor);
+//        actors.put(i, actor);
     }
 
     public void leave(int i)

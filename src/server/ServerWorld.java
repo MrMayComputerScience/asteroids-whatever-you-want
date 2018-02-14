@@ -32,8 +32,8 @@ public class ServerWorld extends World
     {
         if(timer.isDone())
         {
-            List<BoxActor> actors = getObjects(BoxActor.class);
-            for(Actor actor : actors)
+//            List<BoxActor> actors = getObjects(BoxActor.class);
+            /*for(Actor actor : actors)
             {
                 actor.move(10);
                 if(actor.isAtEdge())
@@ -43,7 +43,7 @@ public class ServerWorld extends World
                     actor.turn(180);
                     System.out.println(actor);
                 }
-            }
+            }*/
 
             //System.out.println("tick: " + this.getObjects().size());
             //System.out.println("tick: " + server);
@@ -59,11 +59,11 @@ public class ServerWorld extends World
     {
         String str = "";
 
-        List<BoxActor> actors = getObjects(BoxActor.class);
+        /*List<BoxActor> actors = getObjects(BoxActor.class);
         for(Actor actor : actors)
         {
             str += actor.toString() + ":";
-        }
+        }*/
 
         return str;
     }
