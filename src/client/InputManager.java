@@ -1,29 +1,62 @@
 package client;
 
-import mayflower.Actor;
 import mayflower.Mayflower;
+import mayflower.net.Client;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
-public class InputManager extends Actor {
+public class InputManager
+{
+    private GameMode mode;
     private Map<Integer, String> keyMap;
+    private Client client;
 
-    public InputManager(){
+    public InputManager()
+    {
+        keyMap = new HashMap<Integer, String>();
+        this.client = client;
+    }
 
+    public InputManager(GameMode mode)
+    {
+        this();
+        setGameMode(mode);
     }
-    public void setKeyMap(Map<Integer, String> map){
-        keyMap = map;
+
+    public void setGameMode(GameMode mode)
+    {
+        this.mode = mode;
     }
-    public void scan(){
-        for(int key : keyMap.keySet()){
-            if(Mayflower.isKeyDown(key)){
-                //TODO something.process
+
+    public void setKeyMap(Map<Integer, String> map)
+    {
+        this.keyMap = map;
+    }
+
+    public void scan()
+    {
+        if(null == mode)
+            return;
+
+        //read input from user
+        //convert key-->action
+        //pass action to game mode
+        Set<Integer> keys = keyMap.keySet();
+        for(Integer key : keys)
+        {
+            if(Mayflower.isKeyPressed(key))
+            {
+                System.out.println("Key Pressed: " + key);
+                mode.processPress(keyMap.get(key));
+            }
+            else if(Mayflower.wasKeyDown(key))
+            {
+                //mode.processRelease(keyMap.get(key));
             }
         }
     }
 
-    @Override
-    public void act() {
 
-    }
 }
