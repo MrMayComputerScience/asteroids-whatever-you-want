@@ -32,32 +32,6 @@ public class MultiplayerServer extends Server
             inttogame.get(i).process(i, s);
             return;
         }
-
-        //when the player selects a color
-        if(s.split(" ")[0].equals("PickedColor")){
-            inttocolor.put(i, s.split(" ")[1]);
-            players.add(i);
-            send(i, "ChangeMode Waiting");
-            int left = 4-players.size();
-            send("PlayersLeft "+left);
-
-            if(players.size()>=4){
-                lobby = new ServerGame(this);
-                games.add(lobby);
-
-                List<Integer> addPlayers = new LinkedList<>();
-
-                for(int j=0; j<4; j++){
-                    addPlayers.add(players.remove());
-                }
-
-                for(Integer player: addPlayers){
-                    inttogame.put(player, lobby);
-                    lobby.join(player, inttocolor.get(player));
-                    send(player, "ChangeMode Play");
-                }
-            }
-        }
     }
 
     @Override

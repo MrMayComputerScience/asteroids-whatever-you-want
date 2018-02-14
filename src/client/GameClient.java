@@ -10,8 +10,7 @@ import java.util.List;
 public class GameClient extends Client implements GameMode
 {
     private GameWorld gameWorld;
-    private ChooseWorld chooseWorld;
-    private WaitingWorld waitingWorld;
+
 
     public GameClient()
     {
@@ -29,13 +28,7 @@ public class GameClient extends Client implements GameMode
         this.gameWorld = world;
     }
 
-    public void setChooseWorld(ChooseWorld world){
-        chooseWorld = world;
-    }
 
-    public void setWaitingWorld(WaitingWorld world){
-        waitingWorld = world;
-    }
 
 
     @Override
@@ -49,25 +42,13 @@ public class GameClient extends Client implements GameMode
                     Mayflower.setWorld(gameWorld);break;
                 case("Waiting"):
                     System.out.println("waiting");
-                    setWaitingWorld(new WaitingWorld());
-                    Mayflower.setWorld(waitingWorld);break;
+
             }
             return;
         }
 
-        if(s.split(" ")[0].equals("PlayersLeft")){
-            switch(s.split(" ")[1]){
-                case("1"):
-                    waitingWorld.setCounter(1);break;
-                case("2"):
-                    waitingWorld.setCounter(2);break;
-                case("3"):
-                    waitingWorld.setCounter(3);break;
-                case("4"):
-                    waitingWorld.setCounter(4);break;
-            }
-            return;
-        }
+
+
 
         List<Actor> actors = new LinkedList<Actor>();
         String[] parts = s.split(":");
