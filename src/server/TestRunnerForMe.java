@@ -14,14 +14,9 @@ public class TestRunnerForMe extends Mayflower{
 
     @Override
     public void init() {
-        World world = new World() {
-            @Override
-            public void act() {
-
-            }
-        };
+        World world = new ServerWorld(null);
         SpaceObject o = new SpaceObject("rsrc/Spaceship.png");
-        o.setVelocity(10);
+        o.setVelocity(0);
         world.addObject(o,50,50);
         Mayflower.setWorld(world);
     }

@@ -32,18 +32,11 @@ public class ServerWorld extends World
     {
         if(timer.isDone())
         {
-//            List<BoxActor> actors = getObjects(BoxActor.class);
-            /*for(Actor actor : actors)
+            List<SpaceObject> actors = getObjects(SpaceObject.class);
+            for(SpaceObject actor : actors)
             {
-                actor.move(10);
-                if(actor.isAtEdge())
-                {
-                    while(actor.isAtEdge())
-                        actor.move(-1);
-                    actor.turn(180);
-                    System.out.println(actor);
-                }
-            }*/
+                actor.move(actor.getVelocity());
+            }
 
             //System.out.println("tick: " + this.getObjects().size());
             //System.out.println("tick: " + server);
