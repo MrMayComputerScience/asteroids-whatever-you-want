@@ -36,9 +36,11 @@ public class SpaceObject extends Actor {
             System.out.printf("New: (%d, %d)\n", getX(), getY());
         }
     }
+
     public void setLocation(double x, double y){
         int rot = getRotation();
         super.setLocation(x,y);
         setRotation(rot);
     }
+
 }

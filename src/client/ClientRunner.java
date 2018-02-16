@@ -29,13 +29,9 @@ public class ClientRunner extends Mayflower
         keys.put(Keyboard.KEY_D, "right");
         im.setKeyMap(keys);
 
-        /*ChooseWorld world = new ChooseWorld();
-        world.setClient(client);*/
-
         GameWorld gameWorld = new GameWorld(im);
         client.setGameWorld(gameWorld);
 
-//        Mayflower.setWorld(world);
     }
 
     public static void main(String[] args)

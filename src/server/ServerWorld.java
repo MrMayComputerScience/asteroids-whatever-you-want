@@ -17,7 +17,8 @@ public class ServerWorld extends World
 
     public ServerWorld(Server server)
     {
-        timer = new Timer(750000);
+
+        timer = new Timer(300000);
         this.server = server;
     }
 
