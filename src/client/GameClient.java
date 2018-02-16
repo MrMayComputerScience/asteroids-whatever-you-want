@@ -10,8 +10,6 @@ import java.util.List;
 public class GameClient extends Client implements GameMode
 {
     private GameWorld gameWorld;
-    private ChooseWorld chooseWorld;
-    private WaitingWorld waitingWorld;
 
     public GameClient()
     {
@@ -29,59 +27,64 @@ public class GameClient extends Client implements GameMode
         this.gameWorld = world;
     }
 
-    public void setChooseWorld(ChooseWorld world){
-        chooseWorld = world;
-    }
-
-    public void setWaitingWorld(WaitingWorld world){
-        waitingWorld = world;
-    }
-
 
     @Override
     public void process(String s)
     {
 
-        //change mode from server
-        if(s.split(" ")[0].equals("ChangeMode")){
-            switch(s.split(" ")[1]){
-                case("Play"):
-                    Mayflower.setWorld(gameWorld);break;
-                case("Waiting"):
-                    System.out.println("waiting");
-                    setWaitingWorld(new WaitingWorld());
-                    Mayflower.setWorld(waitingWorld);break;
-            }
-            return;
-        }
-
-        if(s.split(" ")[0].equals("PlayersLeft")){
-            switch(s.split(" ")[1]){
-                case("1"):
-                    waitingWorld.setCounter(1);break;
-                case("2"):
-                    waitingWorld.setCounter(2);break;
-                case("3"):
-                    waitingWorld.setCounter(3);break;
-                case("4"):
-                    waitingWorld.setCounter(4);break;
-            }
-            return;
-        }
-
         List<Actor> actors = new LinkedList<Actor>();
-        String[] parts = s.split(":");
-        for(String part : parts)
+        String[] allActors = s.split(",");
+        for(String actor : allActors)
         {
-            if(!"".equals(part)) {
-                String[] parts2 = part.split(",");
-                String img = "rsrc/"+parts2[0]+".png";
-                int x = Integer.parseInt(parts2[1]);
-                int y = Integer.parseInt(parts2[2]);
-                int r = Integer.parseInt(parts2[3]);
+            if(!"".equals(actor)) {
+                String individualActor = actor.split(":")[0];
+                switch(individualActor){
+                    case("ship"):
+                        String[] shipParams = actor.split(":")[1].split(" ");
+                        int shipX = Integer.parseInt(shipParams[0]);
+                        int shipY = Integer.parseInt(shipParams[1]);
+                        int shipR = Integer.parseInt(shipParams[2]);
+                        int shipV = Integer.parseInt(shipParams[3]);
 
-                actors.add(new GameActor(img, x, y, r));
+                        String[] energy = shipParams[4].split("/");
+                        int reserve = Integer.parseInt(energy[0]);
+                        int ship = Integer.parseInt(energy[1]);
+                        int weapon = Integer.parseInt(energy[2]);
+                        break;
+                    case("asteroid"):
+                        String[] asteroidParams = actor.split(":")[1].split(" ");
+                        String size = asteroidParams[0];
+                        int asteroidX = Integer.parseInt(asteroidParams[0]);
+                        int asteroidY = Integer.parseInt(asteroidParams[1]);
+                        int asteroidR = Integer.parseInt(asteroidParams[2]);
+                        int asteroidV = Integer.parseInt(asteroidParams[3]);
+                        break;
+                    case("collectable"):
+                        String[] collectableParams = actor.split(":")[1].split(" ");
+                        int collectableX = Integer.parseInt(collectableParams[0]);
+                        int collectableY = Integer.parseInt(collectableParams[1]);
+                        break;
+                    case("lazer"):
+                        String[] lazarParams = actor.split(":")[1].split(" ");
+                        int lazerX = Integer.parseInt(lazarParams[0]);
+                        int lazerY = Integer.parseInt(lazarParams[1]);
+                        int lazerR = Integer.parseInt(lazarParams[2]);
+                        int lazerV = Integer.parseInt(lazarParams[3]);
+                        break;
+                    case("turret"):
+                        String[] turretParams = actor.split(":")[1].split(" ");
+                        int turretR = Integer.parseInt(turretParams[0]);
+                        break;
+                }
             }
+
+            String[] parts2 = part.split(",");
+            String img = "rsrc/"+parts2[0]+".png";
+            int x = Integer.parseInt(parts2[1]);
+            int y = Integer.parseInt(parts2[2]);
+            int r = Integer.parseInt(parts2[3]);
+
+            actors.add(new GameActor(img, x, y, r));
         }
         if(null != gameWorld) {
             gameWorld.update(actors);

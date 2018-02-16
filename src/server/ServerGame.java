@@ -26,12 +26,12 @@ public class ServerGame extends MayflowerHeadless
     public void process(int i, String s)
     {
         Actor actor = actors.get(i);
-        System.out.println("test");
+        if(actor.getClass())
         if(actor != null)
         {
             switch(s)
             {
-                case "up":
+                case "turn":
                     actor.setRotation(Direction.NORTH);
                     break;
                 case "down":
