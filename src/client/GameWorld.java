@@ -2,10 +2,12 @@ package client;
 
 import mayflower.Actor;
 import mayflower.World;
+import server.smallAsteriod;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+
 
 public class GameWorld extends World
 {
@@ -17,6 +19,7 @@ public class GameWorld extends World
         this.im = im;
         setBackground("rsrc/MPBackground.jpg");
         updates = new LinkedList<>();
+        addObject(new smallAsteriod(10),10,20);
     }
 
     public void update(List<Actor> actors)
