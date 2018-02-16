@@ -30,12 +30,12 @@ public class ServerGame extends MayflowerHeadless
         String[] direction = system[1].split(" ");
         SpaceObject actor = actors.get(i);
         //replace the classes with system classes
-        if(actor.getClass().equals(null))
-
-        /*if(actor != null)
+//        if(actor.getClass().equals(null))
+        if(actor != null)
         {
             switch(system[0])
             {
+
                 case "Movement":
                     if(direction[1].equals("TurnCCW"))
                         actor.setRotation(actor.getRotation()-5);
@@ -45,6 +45,11 @@ public class ServerGame extends MayflowerHeadless
                         actor.setVelocity(actor.getVelocity()+2);
                     else
                         actor.setVelocity(actor.getVelocity()-2);
+                case "turn":
+                    actor.setRotation(Direction.NORTH);
+                    break;
+                case "down":
+                    actor.setRotation(Direction.SOUTH);
                     break;
                 case "Weapon":
 
@@ -57,7 +62,7 @@ public class ServerGame extends MayflowerHeadless
             }
 
             //actor.move(10);
-        }*/
+        }
     }
 
     public void join(int i, String image)

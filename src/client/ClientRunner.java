@@ -23,14 +23,28 @@ public class ClientRunner extends Mayflower
         InputManager im = new InputManager(client);
 
         Map<Integer, String> keys = new HashMap<Integer, String>();
-        keys.put(Keyboard.KEY_W, "up");
-        keys.put(Keyboard.KEY_A, "left");
-        keys.put(Keyboard.KEY_S, "down");
-        keys.put(Keyboard.KEY_D, "right");
+        keys.put(Keyboard.KEY_LEFT, "turnCCW");
+        keys.put(Keyboard.KEY_RIGHT, "turnCW");
+        keys.put(Keyboard.KEY_UP, "speedUp");
+        keys.put(Keyboard.KEY_DOWN, "speedDown");
+
+        keys.put(Keyboard.KEY_SPACE, "fire");
+
+        keys.put(Keyboard.KEY_W, "addWeapon");
+        keys.put(Keyboard.KEY_S, "removeWeapon");
+
+        keys.put(Keyboard.KEY_E, "addShip");
+        keys.put(Keyboard.KEY_D, "removeShip");
+
+
+
         im.setKeyMap(keys);
+
 
         GameWorld gameWorld = new GameWorld(im);
         client.setGameWorld(gameWorld);
+
+        Mayflower.setWorld(gameWorld);
 
     }
 

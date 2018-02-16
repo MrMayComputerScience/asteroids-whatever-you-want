@@ -4,6 +4,6 @@ public class ServerRunner
 {
     public static void main(String[] args)
     {
-        new MultiplayerServer();
+        new TestServer(1234);
     }
 }
