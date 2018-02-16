@@ -2,7 +2,6 @@ package client;
 
 import mayflower.Actor;
 import mayflower.World;
-import server.smallAsteriod;
 
 import java.util.LinkedList;
 import java.util.List;

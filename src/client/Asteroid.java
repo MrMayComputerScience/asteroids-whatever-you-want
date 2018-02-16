@@ -1,9 +1,9 @@
-package server;
+package client;
 
 import mayflower.Actor;
 
 //needs to extend space object
-public class Asteriod extends Actor
+public class Asteroid extends Actor
 {
     int velocity;
     @Override
@@ -12,10 +12,9 @@ public class Asteriod extends Actor
 
     }
 
-    public Asteriod( int rot)
+    public Asteroid(int rot)
     {
-
-        this.setRotation(rot);
+        //this.setRotation(rot);
         velocity = (int)Math.random()*10;
     }
 
