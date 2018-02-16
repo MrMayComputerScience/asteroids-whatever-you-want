@@ -1,4 +1,4 @@
-package client;
+package server;
 
 import mayflower.Actor;
 
@@ -7,7 +7,10 @@ public class Collectable extends Actor
     public Collectable()
     {
         setImage("rsrc/Collectable.png");
-        setLocation(Math.random()*1024,Math.random()*768);
+        do {
+            setLocation(Math.random() * 1024, Math.random() * 768);
+            //to-do replace spaceObject with spaceActor
+        }while(this.getObjectsInRange(50, SpaceObject.class).size()>0);
     }
 
     @Override
@@ -17,7 +20,10 @@ public class Collectable extends Actor
         Actor touching = this.getOneIntersectingObject(Actor.class);
         if(touching!=null)
         {
-            //
+
+
+
+            this.getWorld();
         }
     }
 
