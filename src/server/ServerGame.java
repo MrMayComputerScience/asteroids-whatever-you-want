@@ -26,7 +26,6 @@ public class ServerGame extends MayflowerHeadless
     public void process(int i, String s)
     {
         Actor actor = actors.get(i);
-        if(actor.getClass())
         if(actor != null)
         {
             switch(s)

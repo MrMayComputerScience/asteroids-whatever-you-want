@@ -44,47 +44,58 @@ public class GameClient extends Client implements GameMode
                         int shipX = Integer.parseInt(shipParams[0]);
                         int shipY = Integer.parseInt(shipParams[1]);
                         int shipR = Integer.parseInt(shipParams[2]);
-                        int shipV = Integer.parseInt(shipParams[3]);
 
-                        String[] energy = shipParams[4].split("/");
+                        String[] energy = shipParams[3].split("/");
                         int reserve = Integer.parseInt(energy[0]);
                         int ship = Integer.parseInt(energy[1]);
                         int weapon = Integer.parseInt(energy[2]);
+
+                        actors.add(new GameActor("rsrc/SpaceshipNoCannon.png", shipX, shipY, shipR));
+
                         break;
                     case("asteroid"):
                         String[] asteroidParams = actor.split(":")[1].split(" ");
                         String size = asteroidParams[0];
-                        int asteroidX = Integer.parseInt(asteroidParams[0]);
-                        int asteroidY = Integer.parseInt(asteroidParams[1]);
-                        int asteroidR = Integer.parseInt(asteroidParams[2]);
-                        int asteroidV = Integer.parseInt(asteroidParams[3]);
+                        int asteroidX = Integer.parseInt(asteroidParams[1]);
+                        int asteroidY = Integer.parseInt(asteroidParams[2]);
+                        int asteroidR = Integer.parseInt(asteroidParams[3]);
+
+                        if(size.equals("small")){
+                            actors.add(new GameActor("rsrc/SmallAsteroid.png", asteroidX, asteroidY, asteroidR));
+                        }
+                        else{
+                            actors.add(new GameActor("rsrc/LargeAsteroid.png", asteroidX, asteroidY, asteroidR));
+                        }
+
                         break;
                     case("collectable"):
                         String[] collectableParams = actor.split(":")[1].split(" ");
                         int collectableX = Integer.parseInt(collectableParams[0]);
                         int collectableY = Integer.parseInt(collectableParams[1]);
+
+                        actors.add(new GameActor("rsrc/Collectable.png", collectableX, collectableY,0));
+
                         break;
                     case("lazer"):
                         String[] lazarParams = actor.split(":")[1].split(" ");
                         int lazerX = Integer.parseInt(lazarParams[0]);
                         int lazerY = Integer.parseInt(lazarParams[1]);
                         int lazerR = Integer.parseInt(lazarParams[2]);
-                        int lazerV = Integer.parseInt(lazarParams[3]);
+
+                        actors.add(new GameActor("rsrc/Lazer.png", lazerX, lazerY,lazerR));
+
                         break;
-                    case("turret"):
-                        String[] turretParams = actor.split(":")[1].split(" ");
-                        int turretR = Integer.parseInt(turretParams[0]);
+                    case("cannon"):
+                        String[] cannonParams = actor.split(":")[1].split(" ");
+                        int cannonX = Integer.parseInt(cannonParams[0]);
+                        int cannonY = Integer.parseInt(cannonParams[1]);
+                        int cannonR = Integer.parseInt(cannonParams[2]);
+
+                        actors.add(new GameActor("rsrc/LazerWorld.png", cannonX, cannonY, cannonR));
+
                         break;
                 }
             }
-
-            String[] parts2 = part.split(",");
-            String img = "rsrc/"+parts2[0]+".png";
-            int x = Integer.parseInt(parts2[1]);
-            int y = Integer.parseInt(parts2[2]);
-            int r = Integer.parseInt(parts2[3]);
-
-            actors.add(new GameActor(img, x, y, r));
         }
         if(null != gameWorld) {
             gameWorld.update(actors);
