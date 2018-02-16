@@ -8,6 +8,7 @@ import mayflower.net.Server;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.SortedMap;
 
 public class ServerWorld extends World
 {
@@ -52,11 +53,11 @@ public class ServerWorld extends World
     {
         String str = "";
 
-        /*List<BoxActor> actors = getObjects(BoxActor.class);
+        List<SpaceObject> actors = getObjects(SpaceObject.class);
         for(Actor actor : actors)
         {
             str += actor.toString() + ":";
-        }*/
+        }
 
         return str;
     }
