@@ -22,58 +22,72 @@ public class ServerGame extends MayflowerHeadless {
         actors = new Stack<>();
         actors.push(new ShipActor());
         world = new ServerWorld(server);
+
+        roles = new HashMap<>();
+
         this.setWorld(world);
     }
 
     public void process(int i, String s) {
-        String[] system = s.split(":");
-        String[] direction = system[1].split(" ");
-        ShipActor actor = actors.get((i - 1) / 3);
 
-        if (actor.getClass().equals(EngineerSystem.class)) {
-            switch (direction[1]) {
+        Actor role = roles.get(i);
+
+        if (role.getClass().equals(EngineerSystem.class)) {
+            switch (s) {
                 case "addMovement":
-                    if (actor.getEngie().getReserveEnergy() > 0) {
-                        actor.getEngie().addShipEnergy();
+                    if (actors.get(i).getEngie().getReserveEnergy() > 0) {
+                        actors.get(i).getEngie().addShipEnergy();
                     }
                     break;
                 case "addCannon":
-                    if (actor.getEngie().getReserveEnergy() > 0) {
-                        actor.getEngie().addCannonEnergy();
+                    if (actors.get(i).getEngie().getReserveEnergy() > 0) {
+                        actors.get(i).getEngie().addCannonEnergy();
                     }
                     break;
                 case "removeMovement":
-                    if (actor.getEngie().getShipEnergy() > 0)
-                        actor.getEngie().removeShipEnergy();
+                    if (actors.get(i).getEngie().getShipEnergy() > 0)
+                        actors.get(i).getEngie().removeShipEnergy();
                     break;
                 case "removeCannon":
-                    if (actor.getEngie().getCannonEnergy() > 0)
-                        actor.getEngie().removeCannonEnergy();
+                    if (actors.get(i).getEngie().getCannonEnergy() > 0)
+                        actors.get(i).getEngie().removeCannonEnergy();
                     break;
             }
-        } else if (actor.getClass().equals(ShipActor.class)) {
-            switch (direction[1]) {
-                case "TurnCCW":
-                    actor.setRotation(actor.getRotation() - 5);
+        }
+        else if (role.getClass().equals(ShipActor.class)) {
+            switch (s) {
+                case "turnCCW":
+                    actors.get(i).setRotation(actors.get(i).getRotation() - 5);
                     break;
-                case "TurnCW":
-                    actor.setRotation(actor.getRotation() + 5);
+                case "turnCW":
+                    actors.get(i).setRotation(actors.get(i).getRotation() + 5);
                     break;
-                case "ChangeSpeed":
-                    actor.setVelocity(actor.getVelocity() + 2);
+                case "speedUp":
+                    actors.get(i).setVelocity(actors.get(i).getVelocity() + 2);
                     break;
             }
-        } else {
-
+        }
+        else if (role.getClass().equals(SpaceCannon.class)) {
+            switch (s) {
+                case "turnCCW":
+                    actors.get(i).getCannon().setRotation(actors.get(i).getCannon().getRotation() - 5);
+                    break;
+                case "turnCW":
+                    actors.get(i).getCannon().setRotation(actors.get(i).getCannon().getRotation() + 5);
+                    break;
+                case "fire":
+                    actors.get(i).getCannon().fire();
+                    break;
+            }
         }
     }
+
 
 
 
     public void join(int i, String role)
     {
         if(actors.size())
-
     }
 
     public void leave(int i)
