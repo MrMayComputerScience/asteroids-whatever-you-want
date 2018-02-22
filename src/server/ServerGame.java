@@ -7,16 +7,20 @@ import mayflower.World;
 import mayflower.net.Server;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.Stack;
 
 public class ServerGame extends MayflowerHeadless {
     //spaceObject needs to be changed to SpaceActor
-    private Map<Integer, ShipActor> actors;
+    private Stack<ShipActor> actors;
+    private Map<Integer, Actor> roles;
     private ServerWorld world;
 
     public ServerGame(Server server) {
         super("Server", 800, 600);
-        actors = new HashMap<Integer, ShipActor>();
+        actors = new Stack<>();
+        actors.push(new ShipActor());
         world = new ServerWorld(server);
         this.setWorld(world);
     }
@@ -66,14 +70,10 @@ public class ServerGame extends MayflowerHeadless {
 
 
 
-    public void join(int i)
+    public void join(int i, String role)
     {
-        ShipActor actor = new ShipActor();
-        int x = 5;//(int)(Math.random() * 700) + 50;
-        int y = 5;//(int)(Math.random() * 500) + 50;
-//        world.addObject(actor, x, y);
+        if(actors.size())
 
-//        actors.put(i, actor);
     }
 
     public void leave(int i)

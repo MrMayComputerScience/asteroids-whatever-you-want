@@ -23,7 +23,11 @@ public class Asteroid extends SpaceObject
     public String toString() {
         return String.format("asteroid:%s %d %d %d", isLarge ? "large":"small", getX(),getY(),getRotation());
     }
-
+    public void explode(){
+        if(isLarge){
+            
+        }
+    }
     public List<SpaceObject> collides()
     {
         return this.getIntersectingObjects(SpaceObject.class);
