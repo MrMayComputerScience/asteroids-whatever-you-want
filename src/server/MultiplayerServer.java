@@ -1,8 +1,15 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> Mason
 package server;
 
 import client.GameActor;
 import client.GameWorld;
+<<<<<<< HEAD
 import mayflower.Actor;
+=======
+>>>>>>> Mason
 import mayflower.net.Server;
 
 import java.util.*;
@@ -13,8 +20,12 @@ public class MultiplayerServer extends Server
     private List<ServerGame> games;
     private Queue<Integer> players;
     private Map<Integer, ServerGame> inttogame;
+<<<<<<< HEAD
     private Map<Integer, String> inttorole;
     private List<String> rolesLeft;
+=======
+    private Map<Integer, String> inttocolor;
+>>>>>>> Mason
 
     public MultiplayerServer()
     {
@@ -24,6 +35,7 @@ public class MultiplayerServer extends Server
         players = new ArrayDeque<>();
         games = new ArrayList<>();
         inttogame = new HashMap<>();
+<<<<<<< HEAD
         inttorole = new HashMap<>();
         rolesLeft = new ArrayList<>();
 
@@ -31,12 +43,22 @@ public class MultiplayerServer extends Server
         rolesLeft.add("Ship");
         rolesLeft.add("Weapon");
 
+=======
+        inttocolor = new HashMap<>();
+>>>>>>> Mason
     }
 
     @Override
     public void process(int i, String s)
     {
+<<<<<<< HEAD
         inttogame.get(i).process(i, s);
+=======
+        if(inttogame.get(i)!=null){
+            inttogame.get(i).process(i, s);
+            return;
+        }
+>>>>>>> Mason
     }
 
     @Override
@@ -44,6 +66,7 @@ public class MultiplayerServer extends Server
     {
         System.out.println("Joined: " + i);
 
+<<<<<<< HEAD
         players.add(i);
         String role = rolesLeft.get((int) Math.random()*rolesLeft.size());
         inttorole.put(i, role);
@@ -59,6 +82,10 @@ public class MultiplayerServer extends Server
             rolesLeft.add("Ship");
             rolesLeft.add("Weapon");
         }
+=======
+        //starting game
+
+>>>>>>> Mason
     }
 
     @Override

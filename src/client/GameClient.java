@@ -11,6 +11,8 @@ public class GameClient extends Client implements GameMode
 {
     private GameWorld gameWorld;
 
+
+
     public GameClient()
     {
         this("localhost");
@@ -27,11 +29,9 @@ public class GameClient extends Client implements GameMode
         this.gameWorld = world;
     }
 
-
     @Override
     public void process(String s)
     {
-
         List<Actor> actors = new LinkedList<Actor>();
         String[] allActors = s.split(",");
         for(String actor : allActors)
