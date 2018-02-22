@@ -14,6 +14,7 @@ public class ServerWorld extends World
 {
     private Server server;
     private Timer timer;
+    //TODO EVENTUALLY: Server world knows which id's it has so it's not broadcasting to server
 
     public ServerWorld(Server server)
     {

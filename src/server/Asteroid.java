@@ -25,7 +25,9 @@ public class Asteroid extends SpaceObject
     }
     public void explode(){
         if(isLarge){
-            
+            int numAst = (int)(Math.random() * 3) + 1;
+            //TODO Add scaling size asteroids
+
         }
     }
     public List<SpaceObject> collides()

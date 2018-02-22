@@ -84,7 +84,7 @@ public class GameClient extends Client implements GameMode
                         int lazerY = Integer.parseInt(lazarParams[1]);
                         int lazerR = Integer.parseInt(lazarParams[2]);
 
-                        actors.add(new GameActor("rsrc/Lazer.png", lazerX, lazerY,lazerR));
+                        actors.add(new GameActor("rsrc/Laser.png", lazerX, lazerY,lazerR));
 
                         break;
                     case("cannon"):
@@ -93,8 +93,11 @@ public class GameClient extends Client implements GameMode
                         int cannonY = Integer.parseInt(cannonParams[1]);
                         int cannonR = Integer.parseInt(cannonParams[2]);
 
-                        actors.add(new GameActor("rsrc/LazerWorld.png", cannonX, cannonY, cannonR));
+                        actors.add(new GameActor("rsrc/LaserCannon.png", cannonX, cannonY, cannonR));
 
+                        break;
+                    case "debug":
+                        System.out.println("DEBUG MSG FROM SERVER: "+actor.split(":")[1]);
                         break;
                 }
             }

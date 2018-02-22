@@ -2,7 +2,7 @@ package client;
 
 import mayflower.Actor;
 import mayflower.World;
-import server.smallAsteriod;
+
 
 import java.util.LinkedList;
 import java.util.List;
@@ -18,7 +18,6 @@ public class GameWorld extends World
     {
         this.im = im;
         updates = new LinkedList<>();
-        addObject(new smallAsteriod(),10,20);
     }
 
     public void update(List<Actor> actors)
