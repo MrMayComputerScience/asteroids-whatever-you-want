@@ -28,9 +28,9 @@ public class ServerGame extends MayflowerHeadless
         Actor actor = actors.get(i);
         if(actor != null)
         {
-            switch(s)
+            switch(actors.get(i).getClass())
             {
-                case "turn":
+                case :
                     actor.setRotation(Direction.NORTH);
                     break;
                 case "down":
@@ -47,9 +47,17 @@ public class ServerGame extends MayflowerHeadless
         }
     }
 
-    public void join(int i, String image)
+    public void join(int i, String role)
     {
-        Actor actor = new BoxActor(image);
+        Actor actor = null;
+        switch(role){
+            case("Engineer"):
+                actor = new EngineerSystem();break;
+            case("Ship"):
+                actor = new ShipActor();break;
+            case("Weapon"):
+                actor = new SpaceCannon();break;
+        }
         int x = 5;//(int)(Math.random() * 700) + 50;
         int y = 5;//(int)(Math.random() * 500) + 50;
         world.addObject(actor, x, y);
