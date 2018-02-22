@@ -34,13 +34,21 @@ public class ServerGame extends MayflowerHeadless {
                         actor.getEngie().addShipEnergy();
                     }
                     break;
-                case "add":
+                case "addWeapon":
                     if (actor.getEngie().getReserveEnergy() > 0) {
                         actor.getEngie().addCannonEnergy();
                     }
                     break;
                 case "removeShip":
-                    if (actor.getEngie().getShipEnergy() > 0)
+                    if (actor.getEngie().getShipEnergy() > 0){
+                        actor.getEngie().removeShipEnergy();
+                    }
+                    break;
+                case "removeWeapon":
+                    if (actor.getEngie().getShipEnergy() > 0){
+                        actor.getEngie().removeCannonEnergy();
+                    }
+                    break;
 
 
             }
