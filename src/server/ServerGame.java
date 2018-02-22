@@ -12,13 +12,13 @@ import java.util.Map;
 public class ServerGame extends MayflowerHeadless
 {
     //spaceObject needs to be changed to SpaceActor
-    private Map<Integer, ShipActor> actors;
+    private Map<Integer, SpaceObject> actors;
     private ServerWorld world;
 
     public ServerGame(Server server)
     {
         super("Server", 800, 600);
-        actors = new HashMap<Integer, ShipActor>();
+        actors = new HashMap<Integer, SpaceObject>();
 
         world = new ServerWorld(server);
         this.setWorld(world);
@@ -69,15 +69,23 @@ public class ServerGame extends MayflowerHeadless
                 case "ChangeSpeed":
                     actor.setVelocity(actor.getVelocity()+2);
                     break;
+                case "DecreaseSpeed":
+                    actor.setVelocity(actor.getVelocity()+2);
+                    break;
+
             }
-            if(direction[1].equals("ChangeSpeed"))
-                actor.setVelocity(actor.getVelocity()+2);
-            else
-                actor.setVelocity(actor.getVelocity()-2);
         }
         else
         {
-
+            switch (direction[1])
+            {
+                case "TurnCCW":
+                    break;
+                case "TurnCW":
+                    break;
+                case "Fire":
+                    break;
+            }
         }
 
         /*if(actor != null)
