@@ -6,10 +6,10 @@ public class ShipActor extends SpaceObject{
     private SpaceCannon cannon;
     private EngineerSystem engie;
 
-    public ShipActor(String img) {
-        super(img);
+    public ShipActor() {
+        super("rsrc/SpaceshipNoCannon.png");
         engie = new EngineerSystem();
-        cannon = new SpaceCannon("rsrc/LaserCannon.png", engie);
+        cannon = new SpaceCannon(engie);
     }
 
     public SpaceCannon getCannon() {

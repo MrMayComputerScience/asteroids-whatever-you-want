@@ -17,7 +17,6 @@ public class ServerGame extends MayflowerHeadless {
     public ServerGame(Server server) {
         super("Server", 800, 600);
         actors = new HashMap<Integer, ShipActor>();
-
         world = new ServerWorld(server);
         this.setWorld(world);
     }
@@ -68,49 +67,12 @@ public class ServerGame extends MayflowerHeadless {
 
         }
     }
-}
-        /*if(actor != null)
-        {
-            switch(system[0])
-            {
 
-                case "Movement":
-                    if(direction[1].equals("TurnCCW"))
-                        actor.setRotation(actor.getRotation()-5);
-                    else
-                        actor.setRotation(actor.getRotation()+5);
-                    if(direction[1].equals("ChangeSpeed"))
-                        actor.setVelocity(actor.getVelocity()+2);
-                    else
-                        actor.setVelocity(actor.getVelocity()-2);
-                case "turn":
-                    actor.setRotation(Direction.NORTH);
-                    break;
-                case "down":
-                    actor.setRotation(Direction.SOUTH);
-                    break;
-                case "Weapon":
 
-                case "left":
-                    actor.setRotation(Direction.WEST);
-                    break;
-                case "right":
-                    actor.setRotation(Direction.EAST);
-                    break;
-            }
-
-            //actor.move(10);
-        }
-    }
 
     public void join(int i, String image)
     {
-<<<<<<< HEAD
-
-        SpaceObject actor = new SpaceObject(image);
-=======
         ShipActor actor = new ShipActor(image);
->>>>>>> Gavin
         int x = 5;//(int)(Math.random() * 700) + 50;
         int y = 5;//(int)(Math.random() * 500) + 50;
 //        world.addObject(actor, x, y);

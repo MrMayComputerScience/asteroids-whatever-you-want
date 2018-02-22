@@ -29,20 +29,11 @@ public class GameClient extends Client implements GameMode
         this.gameWorld = world;
     }
 
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> David's-Branch
 
     @Override
     public void process(String s)
     {
-<<<<<<< HEAD
-=======
 
->>>>>>> David's-Branch
         List<Actor> actors = new LinkedList<Actor>();
         String[] allActors = s.split(",");
         for(String actor : allActors)
