@@ -9,29 +9,67 @@ import mayflower.net.Server;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ServerGame extends MayflowerHeadless
-{
+public class ServerGame extends MayflowerHeadless {
     //spaceObject needs to be changed to SpaceActor
-    private Map<Integer, SpaceObject> actors;
+    private Map<Integer, ShipActor> actors;
     private ServerWorld world;
 
-    public ServerGame(Server server)
-    {
+    public ServerGame(Server server) {
         super("Server", 800, 600);
-        actors = new HashMap<Integer, SpaceObject>();
+        actors = new HashMap<Integer, ShipActor>();
 
         world = new ServerWorld(server);
         this.setWorld(world);
     }
 
-    public void process(int i, String s)
-    {
+    public void process(int i, String s) {
         String[] system = s.split(":");
         String[] direction = system[1].split(" ");
-        SpaceObject actor = actors.get(i);
-        //replace the classes with system classes
-//        if(actor.getClass().equals(null))
-        if(actor != null)
+        ShipActor actor = actors.get((i - 1) / 3);
+
+        if (actor.getClass().equals(EngineerSystem.class)) {
+            switch (direction[1]) {
+                case "addMovement":
+                    if (actor.getEngie().getReserveEnergy() > 0) {
+                        actor.getEngie().addShipEnergy();
+                    }
+                    break;
+                case "addCannon":
+                    if (actor.getEngie().getReserveEnergy() > 0) {
+                        actor.getEngie().addCannonEnergy();
+                    }
+                    break;
+                case "removeMovement":
+                    if (actor.getEngie().getShipEnergy() > 0)
+                        actor.getEngie().removeShipEnergy();
+                    break;
+                case "removeCannon":
+                    if (actor.getEngie().getCannonEnergy() > 0)
+                        actor.getEngie().removeCannonEnergy();
+                    break;
+            }
+        } else if (actor.getClass().equals(ShipActor.class)) {
+            switch (direction[1]) {
+                case "TurnCCW":
+                    actor.setRotation(actor.getRotation() - 5);
+                    break;
+                case "TurnCW":
+                    actor.setRotation(actor.getRotation() + 5);
+                    break;
+                case "ChangeSpeed":
+                    actor.setVelocity(actor.getVelocity() + 2);
+                    break;
+            }
+            if (direction[1].equals("ChangeSpeed"))
+                actor.setVelocity(actor.getVelocity() + 2);
+            else
+                actor.setVelocity(actor.getVelocity() - 2);
+        } else {
+
+        }
+    }
+}
+        /*if(actor != null)
         {
             switch(system[0])
             {
@@ -67,8 +105,12 @@ public class ServerGame extends MayflowerHeadless
 
     public void join(int i, String image)
     {
+<<<<<<< HEAD
 
         SpaceObject actor = new SpaceObject(image);
+=======
+        ShipActor actor = new ShipActor(image);
+>>>>>>> Gavin
         int x = 5;//(int)(Math.random() * 700) + 50;
         int y = 5;//(int)(Math.random() * 500) + 50;
 //        world.addObject(actor, x, y);
@@ -89,4 +131,5 @@ public class ServerGame extends MayflowerHeadless
     public void init()
     {
     }
+
 }

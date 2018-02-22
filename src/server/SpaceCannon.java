@@ -1,7 +1,6 @@
 package server;
 
 public class SpaceCannon extends SpaceObject{
-    private int energy;
     private EngineerSystem engie;
     public SpaceCannon(String img, EngineerSystem engie) {
         super(img);
