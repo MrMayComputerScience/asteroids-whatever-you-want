@@ -85,6 +85,7 @@ public class ServerGame extends MayflowerHeadless {
                 }
             }
         }
+<<<<<<< HEAD
 
 
 
@@ -97,6 +98,25 @@ public class ServerGame extends MayflowerHeadless {
             actors.put(i, actor);
         }
 
+=======
+    }
+}
+
+    public void join(int i, String role)
+    {
+        Actor actor = null;
+        switch(role){
+            case("Engineer"):
+                actor = new EngineerSystem();break;
+            case("Ship"):
+                actor = new ShipActor();break;
+            case("Weapon"):
+                actor = new SpaceCannon();break;
+        }
+
+        int x = (int)(Math.random() * 700) + 50;
+        int y = (int)(Math.random() * 500) + 50;
+>>>>>>> David's-Branch
     }
 
     public void leave(int i)
