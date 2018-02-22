@@ -59,10 +59,6 @@ public class ServerGame extends MayflowerHeadless {
                     actor.setVelocity(actor.getVelocity() + 2);
                     break;
             }
-            if (direction[1].equals("ChangeSpeed"))
-                actor.setVelocity(actor.getVelocity() + 2);
-            else
-                actor.setVelocity(actor.getVelocity() - 2);
         } else {
 
         }
@@ -70,9 +66,9 @@ public class ServerGame extends MayflowerHeadless {
 
 
 
-    public void join(int i, String image)
+    public void join(int i)
     {
-        ShipActor actor = new ShipActor(image);
+        ShipActor actor = new ShipActor();
         int x = 5;//(int)(Math.random() * 700) + 50;
         int y = 5;//(int)(Math.random() * 500) + 50;
 //        world.addObject(actor, x, y);

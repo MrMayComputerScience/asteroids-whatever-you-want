@@ -2,13 +2,13 @@ package server;
 
 public class SpaceCannon extends SpaceObject{
     private EngineerSystem engie;
-    public SpaceCannon(String img, EngineerSystem engie) {
-        super(img);
+    public SpaceCannon(EngineerSystem engie) {
+        super("rsrc/LaserCannon.png");
         this.engie = engie;
         setVelocity(0);
     }
     public SpaceLaser fire(){
-        SpaceLaser laser = new SpaceLaser("rsrc/Laser.png");
+        SpaceLaser laser = new SpaceLaser();
         if(getWorld() != null && engie.getCannonEnergy() > 0){
             getWorld().addObject(laser, getCenterX(), getCenterY());
             laser.setRotation(getRotation());
