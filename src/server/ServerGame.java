@@ -1,9 +1,6 @@
 package server;
 
-import mayflower.Actor;
-import mayflower.Direction;
-import mayflower.MayflowerHeadless;
-import mayflower.World;
+import mayflower.*;
 import mayflower.net.Server;
 
 import java.util.HashMap;
@@ -21,71 +18,12 @@ public class ServerGame extends MayflowerHeadless {
         this.setWorld(world);
     }
 
-    public void process(int i, String s) {
-        String[] system = s.split(":");
-        String[] direction = system[1].split(" ");
-        ShipActor actor = actors.get((i - 1) / 3);
+    public void process(int i, String s)
+    {
+
+    }
 
 
-        if (i % 3 == 1) {
-            switch (direction[1]) {
-                case "addShip":
-                    if (actor.getEngie().getReserveEnergy() > 0) {
-                        actor.getEngie().addShipEnergy();
-                    }
-                    break;
-                case "addWeapon":
-                    if (actor.getEngie().getReserveEnergy() > 0) {
-                        actor.getEngie().addCannonEnergy();
-                    }
-                    break;
-                case "removeShip":
-                    if (actor.getEngie().getShipEnergy() > 0){
-                        actor.getEngie().removeShipEnergy();
-                    }
-                    break;
-                case "removeWeapon":
-                    if (actor.getEngie().getShipEnergy() > 0){
-                        actor.getEngie().removeCannonEnergy();
-                    }
-                    break;
-
-
-            }
-        }
-        else if (i % 3 == 2) {
-                switch (direction[1]) {
-                    case "TurnCCW":
-                        actor.setRotation(actor.getRotation() - 5);
-                        break;
-                    case "TurnCW":
-                        actor.setRotation(actor.getRotation() + 5);
-                        break;
-                    case "ChangeSpeed":
-                        actor.setVelocity(actor.getVelocity() + 2);
-                        break;
-                    case "DecreaseSpeed":
-                        actor.setVelocity(actor.getVelocity() + 2);
-                        break;
-
-                }
-
-            }
-        else {
-            SpaceCannon spaceCannon = actor.getCannon();
-            switch (direction[1]) {
-                case "TurnCCW":
-                    spaceCannon.setRotation(spaceCannon.getRotation() - 5);
-                    break;
-                case "TurnCW":
-                    spaceCannon.setRotation(spaceCannon.getRotation() + 5);
-                    break;
-                case "Fire":
-                    //spaceCannon.fire();
-                    break;
-            }
-            }
-        }
 
 
     public void join(int i, String role)
@@ -96,12 +34,13 @@ public class ServerGame extends MayflowerHeadless {
                 actor = new EngineerSystem();break;
             case("Ship"):
                 actor = new ShipActor();break;
-            case("Weapon"):
-                actor = new SpaceCannon();break;
+            //case("Weapon"):
+                //actor = new SpaceCannon();break;
         }
 
         int x = (int)(Math.random() * 700) + 50;
         int y = (int)(Math.random() * 500) + 50;
+
 
     }
 
