@@ -1,13 +1,11 @@
 
 package server;
 
-<<<<<<< HEAD
 
-=======
 import client.GameActor;
 import client.GameWorld;
 import mayflower.Actor;
->>>>>>> David's-Branch
+
 import mayflower.net.Server;
 
 import java.util.*;
@@ -47,11 +45,11 @@ public class MultiplayerServer extends Server
     public void onJoin(int i)
     {
         System.out.println("Joined: " + i);
-<<<<<<< HEAD
+
         games.get(0).join(i,"rsrc/Spaceship.png");
         //starting game
 
-=======
+
         players.add(i);
         String role = rolesLeft.get((int) Math.random()*rolesLeft.size());
         inttorole.put(i, role);
@@ -67,7 +65,7 @@ public class MultiplayerServer extends Server
             rolesLeft.add("Ship");
             rolesLeft.add("Weapon");
         }
->>>>>>> David's-Branch
+
     }
 
     @Override

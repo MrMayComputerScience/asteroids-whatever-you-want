@@ -70,37 +70,23 @@ public class ServerGame extends MayflowerHeadless {
 
                 }
 
-            } else {
-                SpaceCannon spaceCannon = actor.getCannon();
-                switch (direction[1]) {
-                    case "TurnCCW":
-                        spaceCannon.setRotation(spaceCannon.getRotation() - 5);
-                        break;
-                    case "TurnCW":
-                        spaceCannon.setRotation(spaceCannon.getRotation() + 5);
-                        break;
-                    case "Fire":
-                        //spaceCannon.fire();
-                        break;
-                }
+            }
+        else {
+            SpaceCannon spaceCannon = actor.getCannon();
+            switch (direction[1]) {
+                case "TurnCCW":
+                    spaceCannon.setRotation(spaceCannon.getRotation() - 5);
+                    break;
+                case "TurnCW":
+                    spaceCannon.setRotation(spaceCannon.getRotation() + 5);
+                    break;
+                case "Fire":
+                    //spaceCannon.fire();
+                    break;
+            }
             }
         }
-<<<<<<< HEAD
 
-
-
-    public void join(int i, String image)
-    {
-        ShipActor actor = new ShipActor();
-
-        if(i%3==1) {
-            world.addObject(actor, 5, 5);
-            actors.put(i, actor);
-        }
-
-=======
-    }
-}
 
     public void join(int i, String role)
     {
@@ -116,7 +102,7 @@ public class ServerGame extends MayflowerHeadless {
 
         int x = (int)(Math.random() * 700) + 50;
         int y = (int)(Math.random() * 500) + 50;
->>>>>>> David's-Branch
+
     }
 
     public void leave(int i)
