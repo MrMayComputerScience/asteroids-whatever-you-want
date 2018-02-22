@@ -17,7 +17,6 @@ public class SpaceObject extends Actor {
     @Override
     public void act() {
         if(isAtEdge()){
-            System.out.printf("Old: (%d, %d)\n", getX(), getY());
             int rot = getRotation();
             setRotation(0);
             if(getX() <= 0){
@@ -33,8 +32,13 @@ public class SpaceObject extends Actor {
                 setLocation(getX(), 0);
             }
             setRotation(rot);
-            System.out.printf("New: (%d, %d)\n", getX(), getY());
         }
     }
-    
+
+    public void setLocation(double x, double y){
+        int rot = getRotation();
+        super.setLocation(x,y);
+        setRotation(rot);
+    }
+
 }

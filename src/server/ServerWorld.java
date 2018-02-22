@@ -8,6 +8,7 @@ import mayflower.net.Server;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.SortedMap;
 
 public class ServerWorld extends World
 {
@@ -33,17 +34,10 @@ public class ServerWorld extends World
     {
         if(timer.isDone())
         {
-            List<BoxActor> actors = getObjects(BoxActor.class);
-            for(Actor actor : actors)
+            List<SpaceObject> actors = getObjects(SpaceObject.class);
+            for(SpaceObject actor : actors)
             {
-                actor.move(10);
-                if(actor.isAtEdge())
-                {
-                    while(actor.isAtEdge())
-                        actor.move(-1);
-                    actor.turn(180);
-                    System.out.println(actor);
-                }
+                actor.move(actor.getVelocity());
             }
 
             //System.out.println("tick: " + this.getObjects().size());
@@ -60,10 +54,10 @@ public class ServerWorld extends World
     {
         String str = "";
 
-        List<BoxActor> actors = getObjects(BoxActor.class);
+        List<SpaceObject> actors = getObjects(SpaceObject.class);
         for(Actor actor : actors)
         {
-            str += actor.toString() + ":";
+            str += actor.toString() + ",";
         }
 
         return str;

@@ -10,7 +10,10 @@ public class EngineerSystem extends Actor{
     private int cannonEnergy;
 
     public EngineerSystem(){
+<<<<<<< HEAD
 
+=======
+>>>>>>> Mason
     }
 
     @Override
