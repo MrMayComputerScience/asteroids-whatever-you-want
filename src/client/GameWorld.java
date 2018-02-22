@@ -2,8 +2,8 @@ package client;
 
 import mayflower.Actor;
 import mayflower.World;
-import server.smallAsteriod;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -18,7 +18,6 @@ public class GameWorld extends World
     {
         this.im = im;
         updates = new LinkedList<>();
-        addObject(new smallAsteriod(),10,20);
     }
 
     public void update(List<Actor> actors)
@@ -31,16 +30,25 @@ public class GameWorld extends World
         if(updates.isEmpty()){
             return;
         }
-
         List<Actor> actors = updates.remove();
-
         //remove all GameActor objects
         this.removeObjects(this.getObjects(GameActor.class));
+        if(updates.size()==0) {
 
-        //add new objects
-        for(Actor actor : actors)
+            //add new objects
+            for (Actor actor : actors) {
+                this.addObject(actor, actor.getX(), actor.getY());
+            }
+            return;
+        }
+        List<Actor> actors1 = updates.remove();
+        for(Actor actor :actors)
         {
-            this.addObject(actor, actor.getX(), actor.getY());
+            Actor actor1 = actors1.get(actors.indexOf(actor));
+            if(actor1!=null)
+            {
+                new GameActor(actor,actor.getX(),actor.getY(),actor.getRotation(),actor1.getX(),actor1.getY(),actor1.getRotation(),0.5);
+            }
         }
 
     }

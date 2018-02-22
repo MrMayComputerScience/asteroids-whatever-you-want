@@ -17,7 +17,7 @@ public class ServerWorld extends World
 
     public ServerWorld(Server server)
     {
-
+        addObject(new Asteroid(true),10,10);
         timer = new Timer(300000);
         this.server = server;
     }
@@ -40,8 +40,8 @@ public class ServerWorld extends World
                 actor.move(actor.getVelocity());
             }
 
-            //System.out.println("tick: " + this.getObjects().size());
-            //System.out.println("tick: " + server);
+            System.out.println("tick: " + this.getObjects().size());
+            System.out.println("tick: " + server);
             timer.reset();
             if(null != server)
             {

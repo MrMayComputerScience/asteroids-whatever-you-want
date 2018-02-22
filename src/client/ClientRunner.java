@@ -33,8 +33,8 @@ public class ClientRunner extends Mayflower
         keys.put(Keyboard.KEY_W, "addWeapon");
         keys.put(Keyboard.KEY_S, "removeWeapon");
 
-        keys.put(Keyboard.KEY_E, "addShip");
-        keys.put(Keyboard.KEY_D, "removeShip");
+        keys.put(Keyboard.KEY_E, "addMovement");
+        keys.put(Keyboard.KEY_D, "removeMovement");
 
 
 
