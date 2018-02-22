@@ -64,13 +64,13 @@ public class GameClient extends Client implements GameMode
         System.out.println("Connected to server!");
     }
 
-    @Override
+
     public void processPress(String action) {
         System.out.println("Sending: " + action);
         send(action);
     }
 
-    @Override
+
     public void processRelease(String action) {
 
     }

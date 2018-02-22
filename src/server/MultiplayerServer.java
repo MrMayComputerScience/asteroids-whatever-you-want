@@ -1,7 +1,6 @@
 package server;
 
-import client.GameActor;
-import client.GameWorld;
+
 import mayflower.net.Server;
 
 import java.util.*;
@@ -38,7 +37,7 @@ public class MultiplayerServer extends Server
     public void onJoin(int i)
     {
         System.out.println("Joined: " + i);
-
+        games.get(0).join(i,"rsrc/Spaceship.png");
         //starting game
 
     }

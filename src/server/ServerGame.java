@@ -12,13 +12,13 @@ import java.util.Map;
 public class ServerGame extends MayflowerHeadless
 {
     //spaceObject needs to be changed to SpaceActor
-    private Map<Integer, SpaceObject> actors;
+    private Map<Integer, ShipActor> actors;
     private ServerWorld world;
 
     public ServerGame(Server server)
     {
         super("Server", 800, 600);
-        actors = new HashMap<Integer, SpaceObject>();
+        actors = new HashMap<Integer, ShipActor>();
 
         world = new ServerWorld(server);
         this.setWorld(world);
@@ -30,23 +30,23 @@ public class ServerGame extends MayflowerHeadless
         String[] direction = system[1].split(" ");
         ShipActor actor = actors.get((i-1)/3);
 
-        if(actor.getClass().equals(EngineerSystem.class))
+        if(i%3==1)
         {
             switch (direction[1])
             {
-                case "addMovement":
+                case "addShip":
                     if(actor.getEngie().getReserveEnergy()>0)
                     {
                         actor.getEngie().addShipEnergy();
                     }
                     break;
-                case "addCannon":
+                case "add":
                     if(actor.getEngie().getReserveEnergy()>0)
                     {
                         actor.getEngie().addCannonEnergy();
                     }
                     break;
-                case "removeMovement":
+                case "removeShip":
                     if(actor.getEngie().getShipEnergy()>0)
                         actor.getEngie().removeShipEnergy();
                     break;
@@ -56,7 +56,7 @@ public class ServerGame extends MayflowerHeadless
                     break;
             }
         }
-        else if(actor.getClass().equals(ShipActor.class))
+        else if(i%3==2)
         {
             switch (direction[1])
             {
@@ -77,53 +77,29 @@ public class ServerGame extends MayflowerHeadless
         }
         else
         {
+            SpaceCannon spaceCannon = actor.getCannon();
             switch (direction[1])
             {
                 case "TurnCCW":
+                    spaceCannon.setRotation(spaceCannon.getRotation()-5);
                     break;
                 case "TurnCW":
+                    spaceCannon.setRotation(spaceCannon.getRotation()+5);
                     break;
                 case "Fire":
+                    //spaceCannon.fire();
                     break;
             }
         }
-
-        /*if(actor != null)
-        {
-            switch(system[0])
-            {
-                case "Movement":
-                    if(direction[1].equals("TurnCCW"))
-                        actor.setRotation(actor.getRotation()-5);
-                    else
-                        actor.setRotation(actor.getRotation()+5);
-                    if(direction[1].equals("ChangeSpeed"))
-                        actor.setVelocity(actor.getVelocity()+2);
-                    else
-                        actor.setVelocity(actor.getVelocity()-2);
-                    break;
-                case "Weapon":
-
-                case "left":
-                    actor.setRotation(Direction.WEST);
-                    break;
-                case "right":
-                    actor.setRotation(Direction.EAST);
-                    break;
-            }
-
-            //actor.move(10);
-        }*/
     }
 
     public void join(int i, String image)
     {
         ShipActor actor = new ShipActor(image);
-        int x = 5;//(int)(Math.random() * 700) + 50;
-        int y = 5;//(int)(Math.random() * 500) + 50;
-        world.addObject(actor, x, y);
-
-        actors.put(i, actor);
+        if(i%3==1) {
+            world.addObject(actor, 5, 5);
+            actors.put(i, actor);
+        }
     }
 
     public void leave(int i)
