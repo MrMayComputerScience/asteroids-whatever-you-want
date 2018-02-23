@@ -3,6 +3,7 @@ package client;
 import mayflower.Actor;
 import mayflower.World;
 
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -44,9 +45,11 @@ public class GameWorld extends World
         List<Actor> actors1 = updates.remove();
         for(Actor actor :actors)
         {
-            Actor actor1 = actors1.get(actors.indexOf(actor));
-            if(actor1!=null)
+            int index = actors1.indexOf(actor);
+            Actor actor1;
+            if(index!=-1)
             {
+                actor1 = actors1.get(index);
                 new GameActor(actor,actor.getX(),actor.getY(),actor.getRotation(),actor1.getX(),actor1.getY(),actor1.getRotation(),0.5);
             }
         }
