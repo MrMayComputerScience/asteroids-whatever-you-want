@@ -36,12 +36,12 @@ public class EngineerSystem extends Actor{
     }
     public void removeShipEnergy(){
         if(getReserveEnergy() < 5){
-            shipEnergy++;
+            shipEnergy--;
         }
     }
     public void removeCannonEnergy(){
         if(getReserveEnergy() < 5){
-            cannonEnergy++;
+            cannonEnergy--;
         }
     }
     public int getReserveEnergy(){
