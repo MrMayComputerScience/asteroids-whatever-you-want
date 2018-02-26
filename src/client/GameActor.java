@@ -4,6 +4,7 @@ import mayflower.Actor;
 
 public class GameActor extends Actor
 {
+
     public GameActor(String img, int x, int y, int r)
     {
         setImage(img);

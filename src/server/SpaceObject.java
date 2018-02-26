@@ -4,16 +4,37 @@ import mayflower.Actor;
 import mayflower.Direction;
 
 public class SpaceObject extends Actor {
-    private int velocity;
+    private Vector velocity;
+    private int id;
+
     public SpaceObject(String img){
         setImage(img);
+        velocity = Vector.ZERO;
     }
-    public void setVelocity(int velocity){
+
+    public void setVelocity(Vector velocity){
         this.velocity = velocity;
     }
-    public int getVelocity(){
+    public void accelerate(int velToAdd, int angle){
+//        if(angle != 180 && angle != 0){
+//            angle = -angle;
+//        }
+        double x = velToAdd * Math.cos(angle);
+        double y = velToAdd * Math.sin(angle);
+        velocity = velocity.add(new Vector(x,y));
+    }
+    public Vector getVelocity(){
         return velocity;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public void act() {
         if(isAtEdge()){
@@ -34,11 +55,11 @@ public class SpaceObject extends Actor {
             setRotation(rot);
         }
     }
-
     public void setLocation(double x, double y){
         int rot = getRotation();
         super.setLocation(x,y);
         setRotation(rot);
     }
+
 
 }

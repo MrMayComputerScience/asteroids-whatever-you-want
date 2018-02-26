@@ -5,15 +5,13 @@ import mayflower.Timer;
 import mayflower.World;
 import mayflower.net.Server;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-import java.util.SortedMap;
+import java.util.*;
 
 public class ServerWorld extends World
 {
     private Server server;
     private Timer timer;
+    private int currId;
     //TODO EVENTUALLY: Server world knows which id's it has so it's not broadcasting to server
 
     public ServerWorld(Server server)
@@ -21,12 +19,17 @@ public class ServerWorld extends World
         addObject(new Asteroid(true),10,10);
         timer = new Timer(300000);
         this.server = server;
+        currId = 1;
     }
 
     @Override
     public void addObject(Actor a, int x, int y)
     {
         super.addObject(a, x, y);
+        if(a instanceof SpaceObject){
+            SpaceObject o = (SpaceObject)a;
+            o.setId(currId++); //Postfix so it uses initial value
+        }
         System.out.println("Adding: "+ a + " to " + x +", " + y);
     }
 
@@ -38,11 +41,13 @@ public class ServerWorld extends World
             List<SpaceObject> actors = getObjects(SpaceObject.class);
             for(SpaceObject actor : actors)
             {
-                actor.move(actor.getVelocity());
+                Vector v = actor.getVelocity();
+                double x = actor.getVelocity().getX();
+                double y = actor.getVelocity().getY();
+                actor.setLocation(actor.getX() + x, actor.getY() + y);
             }
 
             System.out.println("tick: " + this.getObjects().size());
-            System.out.println("tick: " + server);
             timer.reset();
             if(null != server)
             {

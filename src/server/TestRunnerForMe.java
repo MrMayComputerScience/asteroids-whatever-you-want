@@ -1,3 +1,4 @@
+/*
 package server;
 
 import mayflower.Direction;
@@ -23,3 +24,4 @@ public class TestRunnerForMe extends Mayflower{
         Mayflower.setWorld(world);
     }
 }
+*/

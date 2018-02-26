@@ -4,14 +4,14 @@ import mayflower.Actor;
 import mayflower.Mayflower;
 import mayflower.net.Client;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class GameClient extends Client implements GameMode
 {
     private GameWorld gameWorld;
-
-
 
     public GameClient()
     {
@@ -34,7 +34,7 @@ public class GameClient extends Client implements GameMode
     public void process(String s)
     {
 
-        List<Actor> actors = new LinkedList<Actor>();
+        List<Actor> actors = new LinkedList<>();
         String[] allActors = s.split(",");
         for(String actor : allActors)
         {
