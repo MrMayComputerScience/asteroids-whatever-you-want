@@ -15,11 +15,11 @@ public class SpaceObject extends Actor {
     public void setVelocity(Vector velocity){
         this.velocity = velocity;
     }
-    public void accelerate(int velToAdd, int angle){
+    public void accelerate(int velToAdd, double angle){
         if(angle != 180 && angle != 0){
             angle = -angle;
         }
-        angle *= (int)(Math.PI/180);
+        angle *= (Math.PI/180);
         double x = velToAdd * Math.cos(angle);
         double y = velToAdd * Math.sin(angle);
         velocity = velocity.add(new Vector(x,y));
