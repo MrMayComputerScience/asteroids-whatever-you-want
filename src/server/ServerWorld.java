@@ -5,10 +5,7 @@ import mayflower.Timer;
 import mayflower.World;
 import mayflower.net.Server;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-import java.util.SortedMap;
+import java.util.*;
 
 public class ServerWorld extends World
 {
@@ -18,7 +15,6 @@ public class ServerWorld extends World
 
     public ServerWorld(Server server)
     {
-        addObject(new Asteroid(true),10,10);
         timer = new Timer(300000);
         this.server = server;
     }
@@ -35,7 +31,10 @@ public class ServerWorld extends World
     {
         if(timer.isDone())
         {
-            List<SpaceObject> actors = getObjects(SpaceObject.class);
+            List<SpaceObject> actors = new ArrayList<>();
+            for(SpaceObject spaceObject:getObjects(SpaceObject.class))
+                actors.add(spaceObject);
+
             for(SpaceObject actor : actors)
             {
                 actor.move(actor.getVelocity());

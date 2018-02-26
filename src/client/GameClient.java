@@ -10,7 +10,7 @@ import java.util.List;
 public class GameClient extends Client implements GameMode
 {
     private GameWorld gameWorld;
-
+    private String Role;
 
 
     public GameClient()
@@ -33,7 +33,11 @@ public class GameClient extends Client implements GameMode
     @Override
     public void process(String s)
     {
-
+        if(s.split(":")[0].equals("Role"))
+        {
+            Role =(s.split(":")[1]);
+            gameWorld.setRole(Role);
+        }
         List<Actor> actors = new LinkedList<Actor>();
         String[] allActors = s.split(",");
         for(String actor : allActors)
@@ -48,9 +52,16 @@ public class GameClient extends Client implements GameMode
                         int shipR = Integer.parseInt(shipParams[2]);
 
                         String[] energy = shipParams[3].split("/");
+
                         int reserve = Integer.parseInt(energy[0]);
                         int ship = Integer.parseInt(energy[1]);
                         int weapon = Integer.parseInt(energy[2]);
+                        if(Role.equals("Engineer"))
+                            gameWorld.setEnergy(reserve);
+                        else if(Role.equals("Ship"))
+                            gameWorld.setEnergy(ship);
+                        else
+                            gameWorld.setEnergy(weapon);
 
                         actors.add(new GameActor("rsrc/SpaceshipNoCannon.png", shipX, shipY, shipR));
 
@@ -128,4 +139,6 @@ public class GameClient extends Client implements GameMode
     public void processRelease(String action) {
 
     }
+
+
 }

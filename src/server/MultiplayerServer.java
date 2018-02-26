@@ -67,6 +67,7 @@ public class MultiplayerServer extends Server
             rolesLeft.add("Ship");
             rolesLeft.add("Weapon");
         }
+        send(i,"Role:"+role);
 
     }
 

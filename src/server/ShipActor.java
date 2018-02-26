@@ -5,7 +5,7 @@ import mayflower.World;
 public class ShipActor extends SpaceObject{
     private SpaceCannon cannon;
     private EngineerSystem engie;
-
+    private int points;
 
 
 
@@ -13,6 +13,7 @@ public class ShipActor extends SpaceObject{
         super("rsrc/SpaceshipNoCannon.png");
         engie = new EngineerSystem();
         cannon = new SpaceCannon(engie);
+        points = Integer.MIN_VALUE;
 
     }
 
@@ -40,7 +41,9 @@ public class ShipActor extends SpaceObject{
                 engie.getReserveEnergy(), engie.getShipEnergy(), engie.getCannonEnergy());
     }
 
-
+    public int getPoints() {
+        return points;
+    }
 
     public EngineerSystem getEngie() {
         return engie;
