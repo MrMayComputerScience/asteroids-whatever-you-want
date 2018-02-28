@@ -24,7 +24,6 @@ public class Asteroid extends SpaceObject
     public String toString() {
 //        return String.format("asteroid: %d %s %d %d %d", getId(), isLarge ? "large":"small", getX(),getY(),getRotation());
         return String.format("asteroid:%s %d %d %d", isLarge ? "large":"small", getX(),getY(),getRotation());
-
     }
     public void explode(){
         if(isLarge){
