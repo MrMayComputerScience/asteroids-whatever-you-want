@@ -33,10 +33,22 @@ public class Asteroid extends SpaceObject
             //TODO Add scaling size asteroids
             double momentumx = getVelocity().getX() *10; //Assuming big asteroid is 10x more massive than small
             double momentumy = getVelocity().getY() *10;
+            //TODO: FIX ALL OF THIS
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
             for(int i = 0; i < numAst; i++){
                 Asteroid small = new Asteroid(false);
-                double x = Math.random() * momentumx;
-                double y = Math.random() * momentumy;
+                if(i < numAst-1){
+                    int angle = (int)(Math.random() * 360);
+                    double x = Math.random() * momentumx;
+                    double y = Math.random() * momentumy;
+                    momentumx -= x;
+                    momentumy -= y;
+                    small.setVelocity(new Vector(x,y));
+                }
+                else{
+                    small.setVelocity(new Vector(momentumx, momentumy));
+                }
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
             }
         }
     }
