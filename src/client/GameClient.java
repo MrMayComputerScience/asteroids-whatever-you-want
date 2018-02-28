@@ -3,15 +3,13 @@ package client;
 import mayflower.Actor;
 import mayflower.Mayflower;
 import mayflower.net.Client;
+import java.util.*;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 
 public class GameClient extends Client implements GameMode
 {
     private GameWorld gameWorld;
+    private Queue<String> serverUpdates;
 
     public GameClient()
     {
@@ -23,6 +21,7 @@ public class GameClient extends Client implements GameMode
         System.out.println("Connecting");
         this.connect(ip, 1234);
         System.out.println("Connected");
+        serverUpdates = new LinkedList();
     }
 
     public void setGameWorld(GameWorld world){
@@ -33,7 +32,6 @@ public class GameClient extends Client implements GameMode
     @Override
     public void process(String s)
     {
-
         Map<Integer, Actor> actors = new HashMap<>();
         String[] allActors = s.split(",");
         for(String actor : allActors)
@@ -108,10 +106,9 @@ public class GameClient extends Client implements GameMode
                 }
             }
         }
-        if(null != gameWorld) {
+        if(null != gameWorld && null != actors) {
             gameWorld.update(actors);
         }
-
     }
 
     @Override

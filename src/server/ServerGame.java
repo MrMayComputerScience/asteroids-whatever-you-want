@@ -82,13 +82,6 @@ public class ServerGame extends MayflowerHeadless {
         }
     }
 
-
-
-
-
-
-
-
     public void join(int i, String role)
     {
         if(roles.size() % 3 == 0){
@@ -112,7 +105,6 @@ public class ServerGame extends MayflowerHeadless {
             int randy = (int)(Math.random() * 600);
             world.addObject(actors.peek(), randx, randy);
         }
-
     }
 
     public void leave(int i)

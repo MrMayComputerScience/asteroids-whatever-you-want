@@ -25,8 +25,7 @@ public class SpaceCannon extends SpaceObject{
         }
     }
     public String toString(){
-//        return String.format("cannon:%d %d %d %d", getId(), getX(),getY(),getRotation());
-        return String.format("cannon:%d %d %d", getX(),getY(),getRotation());
-
+        return String.format("cannon:%d %d %d %d", getId(), getX(),getY(),getRotation());
+//        return String.format("cannon:%d %d %d", getX(),getY(),getRotation());
     }
 }
