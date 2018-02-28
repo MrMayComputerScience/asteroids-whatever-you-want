@@ -30,6 +30,6 @@ public class Collectable extends SpaceObject
 
     @Override
     public String toString() {
-        return "collectable:" +String.valueOf(getX())+" "+String.valueOf(getY());
+        return "Collectable:" + getId()+" "+String.valueOf(getX())+" "+String.valueOf(getY());
     }
 }

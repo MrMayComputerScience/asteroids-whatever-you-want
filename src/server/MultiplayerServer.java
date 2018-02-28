@@ -33,9 +33,9 @@ public class MultiplayerServer extends Server
         rolesLeft.add("Engineer");
         rolesLeft.add("Ship");
         rolesLeft.add("Weapon");
-        games.add(new ServerGame(this));
+//        games.add(new ServerGame(this));
     }
-
+//10.11.1.106
     @Override
     public void process(int i, String s)
     {
@@ -46,16 +46,12 @@ public class MultiplayerServer extends Server
     public void onJoin(int i)
     {
         System.out.println("Joined: " + i);
-
-        games.get(0).join(i,"rsrc/Spaceship.png");
-        //starting game
-
-
         players.add(i);
-        String role = rolesLeft.get((int) Math.random()*rolesLeft.size());
+        String role = rolesLeft.get((int) (Math.random()*rolesLeft.size()));
         inttorole.put(i, role);
         rolesLeft.remove(role);
         send(i, "debug:"+role);
+        send(i,"Role:"+role);
         if(players.size()>=3){
             lobby = new ServerGame(this);
             for(int j=0; j<3; j++){
@@ -67,7 +63,7 @@ public class MultiplayerServer extends Server
             rolesLeft.add("Ship");
             rolesLeft.add("Weapon");
         }
-        send(i,"Role:"+role);
+
         System.out.println(role);
     }
 

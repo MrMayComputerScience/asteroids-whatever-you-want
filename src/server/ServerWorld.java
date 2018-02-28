@@ -11,18 +11,25 @@ public class ServerWorld extends World
 {
     private Server server;
     private Timer timer;
+    private int currId;
     //TODO EVENTUALLY: Server world knows which id's it has so it's not broadcasting to server
 
     public ServerWorld(Server server)
     {
         timer = new Timer(300000);
         this.server = server;
+        currId = 1;
     }
 
     @Override
     public void addObject(Actor a, int x, int y)
     {
         super.addObject(a, x, y);
+        if(a instanceof SpaceObject){
+            SpaceObject o = (SpaceObject)a;
+            o.setId(currId++); //Postfix so it uses initial value
+            System.out.println("ID:"+o.getId());
+        }
         System.out.println("Adding: "+ a + " to " + x +", " + y);
     }
 
@@ -37,11 +44,12 @@ public class ServerWorld extends World
 
             for(SpaceObject actor : actors)
             {
-                actor.move(actor.getVelocity());
+                double x = actor.getVelocity().getX();
+                double y = actor.getVelocity().getY();
+                actor.setLocation(actor.getX() + x, actor.getY() + y);
             }
 
-            //System.out.println("tick: " + this.getObjects().size());
-            //System.out.println("tick: " + server);
+
             timer.reset();
             if(null != server)
             {

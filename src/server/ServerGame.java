@@ -55,12 +55,14 @@ public class ServerGame extends MayflowerHeadless {
             switch (s) {
                 case "turnCCW":
                     ship.setRotation(ship.getRotation() - 5);
+                    ship.getCannon().setRotation(ship.getCannon().getRotation() - 5);
                     break;
                 case "turnCW":
                     ship.setRotation(ship.getRotation() + 5);
+                    ship.getCannon().setRotation(ship.getCannon().getRotation() + 5);
                     break;
                 case "speedUp":
-                    ship.setVelocity(ship.getVelocity() + 2);
+                    ship.accelerate(2,ship.getRotation());
                     break;
             }
         }
@@ -89,9 +91,8 @@ public class ServerGame extends MayflowerHeadless {
 
     public void join(int i, String role)
     {
-        if(i % 3 == 1){
+        if(roles.size() % 3 == 0){
             actors.push(new ShipActor());
-            System.out.println(i);
         }
         ShipActor actor = actors.peek();
         switch(role){
@@ -106,7 +107,7 @@ public class ServerGame extends MayflowerHeadless {
                 break;
         }
 
-        if(i % 3 ==1){
+        if(roles.size() % 3 ==0){
             int randx = (int)(Math.random() * 800);
             int randy = (int)(Math.random() * 600);
             world.addObject(actors.peek(), randx, randy);
