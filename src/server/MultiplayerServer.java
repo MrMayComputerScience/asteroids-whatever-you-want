@@ -34,7 +34,7 @@ public class MultiplayerServer extends Server
         rolesLeft.add("Ship");
         rolesLeft.add("Weapon");
     }
-
+//10.11.1.106
     @Override
     public void process(int i, String s)
     {
@@ -45,9 +45,8 @@ public class MultiplayerServer extends Server
     public void onJoin(int i)
     {
         System.out.println("Joined: " + i);
-
         players.add(i);
-        String role = rolesLeft.get((int) Math.random()*rolesLeft.size());
+        String role = rolesLeft.get((int) (Math.random()*rolesLeft.size()));
         inttorole.put(i, role);
         rolesLeft.remove(role);
         send(i, "debug:"+role);

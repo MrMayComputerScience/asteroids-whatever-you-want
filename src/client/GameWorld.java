@@ -24,7 +24,7 @@ public class GameWorld extends World
         time = System.nanoTime();
     }
 
-    public void update(Map<Integer, Actor> actors, Long time)
+    public void update(Map<Integer, Actor> actors)
     {
         updates.add(actors);
         timeOfUpdate.put(actors, System.nanoTime());
@@ -32,7 +32,6 @@ public class GameWorld extends World
     }
 
     private void redraw(){
-
         this.removeObjects(this.getObjects(GameActor.class));
         if(actors == null && actors1 == null){
 

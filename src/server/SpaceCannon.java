@@ -5,7 +5,7 @@ public class SpaceCannon extends SpaceObject{
     public SpaceCannon(EngineerSystem engie) {
         super("rsrc/LaserCannon.png");
         this.engie = engie;
-        setVelocity(0);
+        setVelocity(Vector.ZERO);
     }
     public SpaceLaser fire(){
         SpaceLaser laser = new SpaceLaser();
@@ -13,9 +13,8 @@ public class SpaceCannon extends SpaceObject{
         if(getWorld() != null && engie.getCannonEnergy() > 0){
             //Add the laser at our center TODO Fix it
             getWorld().addObject(laser, getCenterX(), getCenterY());
-
             laser.setRotation(getRotation());
-            laser.setVelocity(engie.getCannonEnergy() * 5);//TODO: Find good way to do energy-based velocity(???)
+            laser.accelerate(10, getRotation());//TODO: Find good way to do energy-based velocity(???)
             laser.move(10); //TODO: Get good radius to fire from
             return laser;
         }
@@ -26,6 +25,8 @@ public class SpaceCannon extends SpaceObject{
         }
     }
     public String toString(){
-        return String.format("cannon:%d %d %d", getX(),getY(),getRotation());
+        return String.format("cannon:%d %d %d %d", getId(), getX(),getY(),getRotation());
+//        return String.format("cannon:%d %d %d", getX(),getY(),getRotation());
+
     }
 }

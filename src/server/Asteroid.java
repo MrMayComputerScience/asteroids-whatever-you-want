@@ -16,12 +16,15 @@ public class Asteroid extends SpaceObject
     {
         super(isBig ? "rsrc/LargeAsteroid.png" : "rsrc/LargeAsteroid.png");
         isLarge = isBig;
-        setVelocity((int)Math.random()*10);
+        Vector velocity = new Vector((int)Math.random()*10, (int)Math.random()*10);
+        setVelocity(velocity);
     }
 
     @Override
     public String toString() {
-        return String.format("asteroid:%s %d %d %d", isLarge ? "large":"small", getX(),getY(),getRotation());
+        return String.format("asteroid:%d %s %d %d %d", getId(), isLarge ? "large":"small", getX(),getY(),getRotation());
+//        return String.format("asteroid:%s %d %d %d", isLarge ? "large":"small", getX(),getY(),getRotation());
+
     }
     public void explode(){
         if(isLarge){

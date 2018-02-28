@@ -55,12 +55,14 @@ public class ServerGame extends MayflowerHeadless {
             switch (s) {
                 case "turnCCW":
                     ship.setRotation(ship.getRotation() - 5);
+                    ship.getCannon().setRotation(ship.getCannon().getRotation() - 5);
                     break;
                 case "turnCW":
                     ship.setRotation(ship.getRotation() + 5);
+                    ship.getCannon().setRotation(ship.getCannon().getRotation() + 5);
                     break;
                 case "speedUp":
-                    ship.setVelocity(ship.getVelocity() + 2);
+                    ship.accelerate(2,ship.getRotation());
                     break;
             }
         }
