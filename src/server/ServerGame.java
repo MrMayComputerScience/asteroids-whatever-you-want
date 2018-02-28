@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Stack;
 
-public class ServerGame extends MayflowerHeadless {
+public class ServerGame extends Mayflower {
     //spaceObject needs to be changed to SpaceActor
     private Stack<ShipActor> actors;
     private Map<Integer, Actor> roles;

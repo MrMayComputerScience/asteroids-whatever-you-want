@@ -15,9 +15,9 @@ public class GameActor extends Actor
     {
         //interpolate between two points
         double q = 1 - p;
-        int x = (int)(x1 * p + x2 * q);
-        int y = (int)(y1 * p + y2 * q);
-        int r = (int)(r1 * p + r2 * q);
+        int x = (int)(x1 * q + x2 * p);
+        int y = (int)(y1 * q + y2 * p);
+        int r = (int)(r1 * q + r2 * p);
 
         setImage(actor.getImage());
         setLocation(x, y);
