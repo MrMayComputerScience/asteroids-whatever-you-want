@@ -61,7 +61,7 @@ public class GameWorld extends World
                     addObject(add, add.getX(), add.getY());
                 }
 
-                GameActor add = new GameActor(actor, actor.getX(), actor.getY(), actor.getRotation(), actor1.getX(), actor1.getY(), actor1.getRotation(), (double) (System.nanoTime() - timeDiff - time1));
+                GameActor add = new GameActor(actor, actor.getX(), actor.getY(), actor.getRotation(), actor1.getX(), actor1.getY(), actor1.getRotation(), (double) (System.nanoTime() - timeDiff - time1)/timeDiff);
                 addObject(add, add.getX(), add.getY());
             }
         }
