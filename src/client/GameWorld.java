@@ -4,16 +4,13 @@ import mayflower.Actor;
 import mayflower.World;
 
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 
 public class GameWorld extends World
 {
     private InputManager im;
-    private Queue<List<Actor>> updates;
+    private Queue<Map<Integer, Actor>> updates;
 
     public GameWorld(InputManager im)
     {
@@ -21,7 +18,7 @@ public class GameWorld extends World
         updates = new LinkedList<>();
     }
 
-    public void update(List<Actor> actors)
+    public void update(Map<Integer, Actor> actors)
     {
         updates.add(actors);
 
@@ -31,7 +28,7 @@ public class GameWorld extends World
         if(updates.isEmpty()){
             return;
         }
-        List<Actor> actors = updates.remove();
+        Map<Integer, Actor> actors = updates.remove();
         //remove all GameActor objects
         this.removeObjects(this.getObjects(GameActor.class));
         if(updates.size()==0) {

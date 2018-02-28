@@ -41,13 +41,12 @@ public class ServerWorld extends World
             List<SpaceObject> actors = getObjects(SpaceObject.class);
             for(SpaceObject actor : actors)
             {
-                Vector v = actor.getVelocity();
                 double x = actor.getVelocity().getX();
                 double y = actor.getVelocity().getY();
                 actor.setLocation(actor.getX() + x, actor.getY() + y);
             }
 
-            System.out.println("tick: " + this.getObjects().size());
+//            System.out.println("tick: " + this.getObjects().size());
             timer.reset();
             if(null != server)
             {
