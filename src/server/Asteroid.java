@@ -31,7 +31,13 @@ public class Asteroid extends SpaceObject
         if(isLarge){
             int numAst = (int)(Math.random() * 3) + 1;
             //TODO Add scaling size asteroids
-
+            double momentumx = getVelocity().getX() *10; //Assuming big asteroid is 10x more massive than small
+            double momentumy = getVelocity().getY() *10;
+            for(int i = 0; i < numAst; i++){
+                Asteroid small = new Asteroid(false);
+                double x = Math.random() * momentumx;
+                double y = Math.random() * momentumy;
+            }
         }
     }
     public List<SpaceObject> collides()

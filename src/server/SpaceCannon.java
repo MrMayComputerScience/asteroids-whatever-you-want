@@ -7,6 +7,9 @@ public class SpaceCannon extends SpaceObject{
         this.engie = engie;
         setVelocity(Vector.ZERO);
     }
+    public void act(){
+        //No-op
+    }
     public SpaceLaser fire(){
         SpaceLaser laser = new SpaceLaser();
 
