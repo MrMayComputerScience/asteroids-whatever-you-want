@@ -3,18 +3,14 @@ package client;
 import mayflower.Actor;
 import mayflower.Mayflower;
 import mayflower.net.Client;
+import java.util.*;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 
 public class GameClient extends Client implements GameMode
 {
     private GameWorld gameWorld;
     private String Role;
-
-
+    private Queue<String> serverUpdates;
 
     public GameClient()
     {
@@ -27,10 +23,14 @@ public class GameClient extends Client implements GameMode
         this.connect(ip, 1234);
         System.out.println("Connected");
         Role = " ";
+        serverUpdates = new LinkedList();
+
+
     }
 
     public void setGameWorld(GameWorld world){
         this.gameWorld = world;
+        gameWorld.setRole(Role);
     }
 
 
@@ -38,12 +38,14 @@ public class GameClient extends Client implements GameMode
     public void process(String s)
     {
 
+
         if(s.split(":")[0].equals("Role"))
         {
             Role =(s.split(":")[1]);
-            gameWorld.setRole(Role);
+
             System.out.println(s.split(":")[1]);
         }
+
 
 
         Map<Integer, Actor> actors = new HashMap<>();
@@ -58,13 +60,13 @@ public class GameClient extends Client implements GameMode
                 switch(individualActor){
                     case("ship"):
                         String[] shipParams = actor.split(":")[1].split(" ");
-                        System.out.println(shipParams[0]);
+                        System.out.println("ID"+shipParams[0]);
                         id = Integer.parseInt(shipParams[0]);
                         int shipX = Integer.parseInt(shipParams[1]);
                         int shipY = Integer.parseInt(shipParams[2]);
                         int shipR = Integer.parseInt(shipParams[3]);
                         gameWorld.setScore(Integer.parseInt(shipParams[4]));
-                        String[] energy = shipParams[4].split("/");
+                        String[] energy = shipParams[5].split("/");
                         int reserve = Integer.parseInt(energy[0]);
                         int ship = Integer.parseInt(energy[1]);
                         int weapon = Integer.parseInt(energy[2]);
@@ -129,10 +131,9 @@ public class GameClient extends Client implements GameMode
                 }
             }
         }
-        if(null != gameWorld) {
+        if(null != gameWorld && null != actors) {
             gameWorld.update(actors);
         }
-
     }
 
     @Override

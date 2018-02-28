@@ -33,7 +33,6 @@ public class MultiplayerServer extends Server
         rolesLeft.add("Engineer");
         rolesLeft.add("Ship");
         rolesLeft.add("Weapon");
-//        games.add(new ServerGame(this));
     }
 //10.11.1.106
     @Override

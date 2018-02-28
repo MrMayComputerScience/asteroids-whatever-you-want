@@ -62,10 +62,15 @@ public class ShipActor extends SpaceObject{
 
     public String toString(){
 
-        return String.format("ship: %d %d %d %d %d/%d/%d", getId(), getX(), getY(), getRotation(), getPoints(),
+        System.out.println("ID:"+getId());
+        return String.format("ship:%d %d %d %d %d %d/%d/%d", getId(), getX(), getY(), getRotation(), getPoints(),
                 engie.getReserveEnergy(), engie.getShipEnergy(), engie.getCannonEnergy());
 
+
+//        return String.format("ship:%d %d %d %d/%d/%d", getX(), getY(), getRotation(),
+//                engie.getReserveEnergy(), engie.getShipEnergy(), engie.getCannonEnergy());
     }
+
 
     public int getPoints() {
         return points;

@@ -7,6 +7,9 @@ public class SpaceCannon extends SpaceObject{
         this.engie = engie;
         setVelocity(Vector.ZERO);
     }
+    public void act(){
+        //No-op
+    }
     public SpaceLaser fire(){
         SpaceLaser laser = new SpaceLaser();
 
@@ -25,8 +28,7 @@ public class SpaceCannon extends SpaceObject{
         }
     }
     public String toString(){
-//        return String.format("cannon: %d %d %d %d", getId(), getX(),getY(),getRotation());
-        return String.format("cannon:%d %d %d", getX(),getY(),getRotation());
-
+        return String.format("cannon:%d %d %d %d", getId(), getX(),getY(),getRotation());
+//        return String.format("cannon:%d %d %d", getX(),getY(),getRotation());
     }
 }
