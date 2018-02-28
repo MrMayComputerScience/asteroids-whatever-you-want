@@ -11,7 +11,7 @@ public class GameActor extends Actor
         setRotation(r);
     }
 
-    public GameActor(String img, int x1, int y1, int r1, int x2, int y2, int r2, double p)
+    public GameActor(Actor actor, int x1, int y1, int r1, int x2, int y2, int r2, double p)
     {
         //interpolate between two points
         double q = 1 - p;
@@ -19,7 +19,7 @@ public class GameActor extends Actor
         int y = (int)(y1 * p + y2 * q);
         int r = (int)(r1 * p + r2 * q);
 
-        setImage(img);
+        setImage(actor.getImage());
         setLocation(x, y);
         setRotation(r);
     }

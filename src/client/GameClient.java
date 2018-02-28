@@ -4,12 +4,12 @@ import mayflower.Actor;
 import mayflower.Mayflower;
 import mayflower.net.Client;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class GameClient extends Client implements GameMode
 {
     private GameWorld gameWorld;
+    private Queue<String> serverUpdates;
 
 
 
@@ -23,6 +23,7 @@ public class GameClient extends Client implements GameMode
         System.out.println("Connecting");
         this.connect(ip, 1234);
         System.out.println("Connected");
+        serverUpdates = new LinkedList();
     }
 
     public void setGameWorld(GameWorld world){
@@ -33,8 +34,8 @@ public class GameClient extends Client implements GameMode
     @Override
     public void process(String s)
     {
-
         List<Actor> actors = new LinkedList<Actor>();
+
         String[] allActors = s.split(",");
         for(String actor : allActors)
         {
@@ -84,7 +85,7 @@ public class GameClient extends Client implements GameMode
                         int lazerY = Integer.parseInt(lazarParams[1]);
                         int lazerR = Integer.parseInt(lazarParams[2]);
 
-                        actors.add(new GameActor("rsrc/Lazer.png", lazerX, lazerY,lazerR));
+                        actors.add(new GameActor("rsrc/Laser.png", lazerX, lazerY,lazerR));
 
                         break;
                     case("cannon"):
@@ -93,16 +94,18 @@ public class GameClient extends Client implements GameMode
                         int cannonY = Integer.parseInt(cannonParams[1]);
                         int cannonR = Integer.parseInt(cannonParams[2]);
 
-                        actors.add(new GameActor("rsrc/LazerWorld.png", cannonX, cannonY, cannonR));
+                        actors.add(new GameActor("rsrc/LaserCannon.png", cannonX, cannonY, cannonR));
 
+                        break;
+                    case "debug":
+                        System.out.println("DEBUG MSG FROM SERVER: "+actor.split(":")[1]);
                         break;
                 }
             }
         }
-        if(null != gameWorld) {
-            gameWorld.update(actors);
+        if(null != gameWorld && null != actors) {
+            gameWorld.update(actors, System.nanoTime());
         }
-
     }
 
     @Override
@@ -115,13 +118,13 @@ public class GameClient extends Client implements GameMode
         System.out.println("Connected to server!");
     }
 
-    @Override
+
     public void processPress(String action) {
         System.out.println("Sending: " + action);
         send(action);
     }
 
-    @Override
+
     public void processRelease(String action) {
 
     }

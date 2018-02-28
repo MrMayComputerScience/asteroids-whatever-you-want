@@ -14,11 +14,12 @@ public class ServerWorld extends World
 {
     private Server server;
     private Timer timer;
+    //TODO EVENTUALLY: Server world knows which id's it has so it's not broadcasting to server
 
     public ServerWorld(Server server)
     {
-
-        timer = new Timer(300000);
+        addObject(new Asteroid(true),10,10);
+        timer = new Timer(300000000);
         this.server = server;
     }
 
@@ -40,8 +41,8 @@ public class ServerWorld extends World
                 actor.move(actor.getVelocity());
             }
 
-            //System.out.println("tick: " + this.getObjects().size());
-            //System.out.println("tick: " + server);
+            System.out.println("tick: " + this.getObjects().size());
+            System.out.println("tick: " + server);
             timer.reset();
             if(null != server)
             {

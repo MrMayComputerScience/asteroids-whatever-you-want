@@ -1,11 +1,9 @@
 package server;
 
-import mayflower.Actor;
-import mayflower.Direction;
-import mayflower.MayflowerHeadless;
-import mayflower.World;
+import mayflower.*;
 import mayflower.net.Server;
 
+import javax.print.attribute.standard.Severity;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -20,73 +18,91 @@ public class ServerGame extends MayflowerHeadless {
     public ServerGame(Server server) {
         super("Server", 800, 600);
         actors = new Stack<>();
-        actors.push(new ShipActor());
         world = new ServerWorld(server);
-
         roles = new HashMap<>();
-
         this.setWorld(world);
     }
+
 
     public void process(int i, String s) {
 
         Actor role = roles.get(i);
-
         if (role.getClass().equals(EngineerSystem.class)) {
+            EngineerSystem engie = (EngineerSystem) role;
             switch (s) {
                 case "addMovement":
-                    if (actors.get(i).getEngie().getReserveEnergy() > 0) {
-                        actors.get(i).getEngie().addShipEnergy();
+                    if (engie.getReserveEnergy() > 0) {
+                        engie.addShipEnergy();
                     }
                     break;
                 case "addCannon":
-                    if (actors.get(i).getEngie().getReserveEnergy() > 0) {
-                        actors.get(i).getEngie().addCannonEnergy();
+                    if (engie.getReserveEnergy() > 0) {
+                        engie.addCannonEnergy();
                     }
                     break;
                 case "removeMovement":
-                    if (actors.get(i).getEngie().getShipEnergy() > 0)
-                        actors.get(i).getEngie().removeShipEnergy();
+                    if (engie.getShipEnergy() > 0)
+                        engie.removeShipEnergy();
                     break;
                 case "removeCannon":
-                    if (actors.get(i).getEngie().getCannonEnergy() > 0)
-                        actors.get(i).getEngie().removeCannonEnergy();
+                    if (engie.getCannonEnergy() > 0)
+                        engie.removeCannonEnergy();
                     break;
             }
         }
         else if (role.getClass().equals(ShipActor.class)) {
+            ShipActor ship = (ShipActor) role;
             switch (s) {
                 case "turnCCW":
-                    actors.get(i).setRotation(actors.get(i).getRotation() - 5);
+                    ship.setRotation(ship.getRotation() - 5);
                     break;
                 case "turnCW":
-                    actors.get(i).setRotation(actors.get(i).getRotation() + 5);
+                    ship.setRotation(ship.getRotation() + 5);
                     break;
                 case "speedUp":
-                    actors.get(i).setVelocity(actors.get(i).getVelocity() + 2);
+                    ship.setVelocity(ship.getVelocity() + 2);
                     break;
             }
         }
         else if (role.getClass().equals(SpaceCannon.class)) {
+            SpaceCannon cannon = (SpaceCannon) role;
             switch (s) {
                 case "turnCCW":
-                    actors.get(i).getCannon().setRotation(actors.get(i).getCannon().getRotation() - 5);
+                    cannon.setRotation(cannon.getRotation() - 5);
                     break;
                 case "turnCW":
-                    actors.get(i).getCannon().setRotation(actors.get(i).getCannon().getRotation() + 5);
+                    cannon.setRotation(cannon.getRotation() + 5);
                     break;
                 case "fire":
-                    actors.get(i).getCannon().fire();
+                    cannon.fire();
                     break;
             }
         }
     }
-    public void join(int i, String role) {
-        switch (role) {
+
+    public void join(int i, String role)
+    {
+        if(roles.size() % 3 == 0){
+            actors.push(new ShipActor());
+        }
+        ShipActor actor = actors.peek();
+        switch(role){
+            case "Engineer":
+                roles.put(i, actor.getEngie());
+                break;
+            case "Ship":
+                roles.put(i, actor);
+                break;
+            case "Weapon":
+                roles.put(i, actor.getCannon());
+                break;
         }
 
-        int x = (int) (Math.random() * 700) + 50;
-        int y = (int) (Math.random() * 500) + 50;
+        if(roles.size() % 3 ==0){
+            int randx = (int)(Math.random() * 800);
+            int randy = (int)(Math.random() * 600);
+            world.addObject(actors.peek(), randx, randy);
+        }
     }
 
     public void leave(int i)

@@ -6,15 +6,20 @@ public class ShipActor extends SpaceObject{
     private SpaceCannon cannon;
     private EngineerSystem engie;
 
+
+
+
     public ShipActor() {
         super("rsrc/SpaceshipNoCannon.png");
         engie = new EngineerSystem();
         cannon = new SpaceCannon(engie);
+
     }
 
     public SpaceCannon getCannon() {
         return cannon;
     }
+
 
     @Override
     protected void addedToWorld(World world) {
@@ -36,7 +41,9 @@ public class ShipActor extends SpaceObject{
     }
 
 
+
     public EngineerSystem getEngie() {
         return engie;
     }
+
 }
