@@ -1,16 +1,15 @@
 package server;
 
-import javafx.util.Pair;
 import mayflower.Actor;
-
-import java.util.Map;
 
 public class EngineerSystem extends Actor{
     private int shipEnergy;
     private int cannonEnergy;
+    private int totalEnergy;
 
-    public EngineerSystem(){
-
+    public EngineerSystem()
+    {
+        totalEnergy = 5;
     }
 
     @Override
@@ -36,16 +35,24 @@ public class EngineerSystem extends Actor{
         }
     }
     public void removeShipEnergy(){
-        if(getReserveEnergy() < 5){
+        if(getReserveEnergy() < totalEnergy){
             shipEnergy--;
         }
     }
     public void removeCannonEnergy(){
-        if(getReserveEnergy() < 5){
+        if(getReserveEnergy() < totalEnergy){
             cannonEnergy--;
         }
     }
     public int getReserveEnergy(){
-        return 5 - cannonEnergy - shipEnergy;
+        return totalEnergy - cannonEnergy - shipEnergy;
+    }
+    public void removeTotalEnergy()
+    {
+        totalEnergy--;
+    }
+
+    public int getTotalEnergy() {
+        return totalEnergy;
     }
 }

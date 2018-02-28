@@ -89,8 +89,9 @@ public class ServerGame extends MayflowerHeadless {
 
     public void join(int i, String role)
     {
-        if(roles.size() % 3 == 0){
+        if(i % 3 == 1){
             actors.push(new ShipActor());
+            System.out.println(i);
         }
         ShipActor actor = actors.peek();
         switch(role){
@@ -105,7 +106,7 @@ public class ServerGame extends MayflowerHeadless {
                 break;
         }
 
-        if(roles.size() % 3 ==0){
+        if(i % 3 ==1){
             int randx = (int)(Math.random() * 800);
             int randy = (int)(Math.random() * 600);
             world.addObject(actors.peek(), randx, randy);

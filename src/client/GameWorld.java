@@ -17,6 +17,7 @@ public class GameWorld extends World
     private Queue<List<Actor>> updates;
     private String role;
     private int energy;
+    private int score;
 
     public GameWorld(InputManager im)
     {
@@ -95,7 +96,7 @@ public class GameWorld extends World
 
             supercalafragilistic = Color.GREEN;
         }
-        showText(String.valueOf("Points:"+0),32,650,32, supercalafragilistic);
+        showText(String.valueOf("Points:"+score),32,650,32, supercalafragilistic);
         showText("Energy:"+energy,32,650,64, supercalafragilistic);
     }
 
@@ -112,5 +113,9 @@ public class GameWorld extends World
 
     public void setRole(String role) {
         this.role = role;
+    }
+    public void setScore(int score)
+    {
+        this.score = score;
     }
 }

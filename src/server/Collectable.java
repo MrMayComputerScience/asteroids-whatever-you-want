@@ -9,8 +9,8 @@ public class Collectable extends SpaceObject
         super("rsrc/Collectable.png");
         do {
             setLocation(Math.random() * 1024, Math.random() * 768);
-            //to-do replace spaceObject with spaceActor
-        }while(this.getObjectsInRange(50, SpaceObject.class).size()>0);
+
+        }while(this.getObjectsInRange(50, ShipActor.class).size()>0);
         setVelocity(0);
     }
     public void setVelocity(int v){
@@ -19,19 +19,17 @@ public class Collectable extends SpaceObject
     @Override
     public void act()
     {
-        //To-do replace Actor with something else
-        Actor touching = this.getOneIntersectingObject(Actor.class);
+
+        ShipActor touching = this.getOneIntersectingObject(ShipActor.class);
         if(touching!=null)
         {
-
-
-
-            this.getWorld();
+            touching.addPoint();
+            this.getWorld().removeObject(this);
         }
     }
 
     @Override
     public String toString() {
-        return "Collectable:" +String.valueOf(getX())+" "+String.valueOf(getY());
+        return "collectable:" +String.valueOf(getX())+" "+String.valueOf(getY());
     }
 }

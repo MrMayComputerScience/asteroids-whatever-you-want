@@ -40,13 +40,18 @@ public class ServerWorld extends World
                 actor.move(actor.getVelocity());
             }
 
-            System.out.println("tick: " + this.getObjects().size());
-            System.out.println("tick: " + server);
+            //System.out.println("tick: " + this.getObjects().size());
+            //System.out.println("tick: " + server);
             timer.reset();
             if(null != server)
             {
                 server.send(this.toString());
             }
+        }
+        if(getObjects(Collectable.class).size()==0)
+        {
+            Collectable collectable = new Collectable();
+            addObject(collectable,collectable.getX(),collectable.getY());
         }
     }
 

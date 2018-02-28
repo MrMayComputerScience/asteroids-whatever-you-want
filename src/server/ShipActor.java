@@ -13,7 +13,7 @@ public class ShipActor extends SpaceObject{
         super("rsrc/SpaceshipNoCannon.png");
         engie = new EngineerSystem();
         cannon = new SpaceCannon(engie);
-        points = Integer.MIN_VALUE;
+        points = 0;
 
     }
 
@@ -21,6 +21,10 @@ public class ShipActor extends SpaceObject{
         return cannon;
     }
 
+    public void takeDamage()
+    {
+        engie.removeTotalEnergy();
+    }
 
     @Override
     protected void addedToWorld(World world) {
@@ -34,10 +38,30 @@ public class ShipActor extends SpaceObject{
     public void act() {
         super.act();
         cannon.setLocation(getX(), getY());
+        if(engie.getReserveEnergy()==-1)
+        {
+            int random =(int)Math.random()*2;
+            if(random == 1)
+            {
+                if(engie.getShipEnergy()>0)
+                    engie.removeShipEnergy();
+                else
+                    engie.removeCannonEnergy();
+            }
+            else if(random == 0&&engie.getCannonEnergy()>0)
+            {
+                if(engie.getCannonEnergy()>0)
+                    engie.removeCannonEnergy();
+                else
+                    engie.removeShipEnergy();
+            }
+
+        }
+
     }
 
     public String toString(){
-        return String.format("ship:%d %d %d %d/%d/%d", getX(), getY(), getRotation(),
+        return String.format("ship:%d %d %d %d %d/%d/%d", getX(), getY(), getRotation(), getPoints(),
                 engie.getReserveEnergy(), engie.getShipEnergy(), engie.getCannonEnergy());
     }
 
@@ -45,6 +69,7 @@ public class ShipActor extends SpaceObject{
         return points;
     }
 
+    public void addPoint(){points++;}
     public EngineerSystem getEngie() {
         return engie;
     }

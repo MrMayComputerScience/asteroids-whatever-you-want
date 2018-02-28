@@ -23,6 +23,7 @@ public class GameClient extends Client implements GameMode
         System.out.println("Connecting");
         this.connect(ip, 1234);
         System.out.println("Connected");
+        Role = "";
     }
 
     public void setGameWorld(GameWorld world){
@@ -37,6 +38,7 @@ public class GameClient extends Client implements GameMode
         {
             Role =(s.split(":")[1]);
             gameWorld.setRole(Role);
+            System.out.println(s.split(":")[1]);
         }
         List<Actor> actors = new LinkedList<Actor>();
         String[] allActors = s.split(",");
@@ -50,8 +52,8 @@ public class GameClient extends Client implements GameMode
                         int shipX = Integer.parseInt(shipParams[0]);
                         int shipY = Integer.parseInt(shipParams[1]);
                         int shipR = Integer.parseInt(shipParams[2]);
-
-                        String[] energy = shipParams[3].split("/");
+                        gameWorld.setScore(Integer.parseInt(shipParams[3]));
+                        String[] energy = shipParams[4].split("/");
 
                         int reserve = Integer.parseInt(energy[0]);
                         int ship = Integer.parseInt(energy[1]);

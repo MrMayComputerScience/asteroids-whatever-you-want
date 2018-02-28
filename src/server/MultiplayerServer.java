@@ -68,7 +68,7 @@ public class MultiplayerServer extends Server
             rolesLeft.add("Weapon");
         }
         send(i,"Role:"+role);
-
+        System.out.println(role);
     }
 
     @Override
