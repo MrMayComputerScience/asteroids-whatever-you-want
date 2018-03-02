@@ -87,6 +87,7 @@ public class GameWorld extends World
         }
         showText(String.valueOf("Points:"+score),32,650,32, supercalafragilistic);
         showText("Energy:"+energy,32,650,64, supercalafragilistic);
+        showText(role,32,0,0,supercalafragilistic);
 
 
         if((double) (System.nanoTime() - timeDiff - time1)<timeDiff) {
