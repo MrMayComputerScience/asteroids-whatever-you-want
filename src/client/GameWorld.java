@@ -39,7 +39,9 @@ public class GameWorld extends World
     }
 
     private void redraw(){
-        this.removeObjects(this.getObjects(GameActor.class));
+        List objects = new ArrayList();
+        for(Object object:getObjects(GameActor.class))
+            objects.add(object);
         if(actors == null && actors1 == null){
 
             if(updates.size()<2){
@@ -103,6 +105,8 @@ public class GameWorld extends World
                     addObject(add, add.getX(), add.getY());
                 }
             }
+            removeObjects(objects);
+
         }
         else if(!updates.isEmpty()){
             actors = actors1;
@@ -130,5 +134,9 @@ public class GameWorld extends World
     {
         im.scan();
         redraw();
+    }
+
+    public String getRole() {
+        return role;
     }
 }

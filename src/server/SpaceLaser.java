@@ -13,6 +13,7 @@ public class SpaceLaser extends SpaceObject {
 //        return String.format("lazer:%d %d %d", getX(), getY(), getRotation());
 
     }
+
     public void act(){
         super.act();
         //Should always work. Dont start lasers when theyre not on their ships
