@@ -22,6 +22,7 @@ public class ClientRunner extends Mayflower
         GameClient client = new GameClient(ip);
         InputManager im = new InputManager(client);
 
+
         Map<Integer, String> keys = new HashMap<Integer, String>();
         keys.put(Keyboard.KEY_LEFT, "turnCCW");
         keys.put(Keyboard.KEY_RIGHT, "turnCW");
@@ -45,6 +46,7 @@ public class ClientRunner extends Mayflower
         client.setGameWorld(gameWorld);
 
         Mayflower.setWorld(gameWorld);
+
 
     }
 

@@ -22,6 +22,7 @@ public class GameActor extends Actor
         setImage(actor.getImage());
         setLocation(x, y);
         setRotation(r);
+
     }
 
     public String toString()

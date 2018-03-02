@@ -25,12 +25,21 @@ public class ServerWorld extends World
     @Override
     public void addObject(Actor a, int x, int y)
     {
-        super.addObject(a, x, y);
-        if(a instanceof SpaceObject){
-            SpaceObject o = (SpaceObject)a;
-            o.setId(currId++); //Postfix so it uses initial value
+        synchronized(this){
+            super.addObject(a, x, y);
+            if(a instanceof SpaceObject){
+                SpaceObject o = (SpaceObject)a;
+                o.setId(currId++); //Postfix so it uses initial value
+            }
+            System.out.println("Adding: "+ a + " to " + x +", " + y);
         }
-        System.out.println("Adding: "+ a + " to " + x +", " + y);
+    }
+
+    @Override
+    public void removeObject(Actor object) {
+        synchronized (this){
+            super.removeObject(object);
+        }
     }
 
     @Override
@@ -53,9 +62,17 @@ public class ServerWorld extends World
 
 //            System.out.println("tick: " + this.getObjects().size());
             timer.reset();
+            if(getObjects(Collectable.class).size()==0)
+            {
+
+                Collectable collectable = new Collectable();
+                addObject(collectable,collectable.getX(),collectable.getY());
+            }
 
         }
     }
+
+
 
     public String toString()
     {
