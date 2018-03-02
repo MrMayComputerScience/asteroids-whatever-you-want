@@ -1,7 +1,9 @@
 package client;
 
 import mayflower.Actor;
+import mayflower.Color;
 import mayflower.World;
+import server.Collectable;
 
 
 import java.util.*;
@@ -15,6 +17,9 @@ public class GameWorld extends World
     private Long time;
     private Map<Integer, Actor> actors;
     private Map<Integer, Actor> actors1;
+    private String role;
+    private int energy;
+    private int score;
 
     public GameWorld(InputManager im)
     {
@@ -22,6 +27,8 @@ public class GameWorld extends World
         updates = new LinkedList<>();
         timeOfUpdate = new HashMap<>();
         time = System.nanoTime();
+        energy = 0;
+        score = 0;
     }
 
     public void update(Map<Integer, Actor> actors)
@@ -49,7 +56,37 @@ public class GameWorld extends World
         Long time2 = timeOfUpdate.get(actors1);
         Long timeDiff = time2 - time1;
 //        System.out.println((double) (System.nanoTime() - timeDiff - time1) / timeDiff + " "+time1+" "+time2);
+        Set keys = new HashSet();
+        for(String s: getTexts().keySet())
+            keys.add(s);
 
+        for(Object s:keys)
+        {
+            getTexts().remove(s);
+        }
+        Color supercalafragilistic;
+
+        if(role==null)
+        {
+
+            supercalafragilistic = Color.MEGENTA;
+        }
+        else if(role.equals("Ship"))
+        {
+            supercalafragilistic = Color.BLUE;
+        }
+        else if(role.equals("Weapon"))
+        {
+
+            supercalafragilistic = Color.RED;
+        }
+        else
+        {
+
+            supercalafragilistic = Color.GREEN;
+        }
+        showText(String.valueOf("Points:"+score),32,650,32, supercalafragilistic);
+        showText("Energy:"+energy,32,650,64, supercalafragilistic);
 
 
         if((double) (System.nanoTime() - timeDiff - time1)<timeDiff) {
@@ -60,9 +97,10 @@ public class GameWorld extends World
                     GameActor add = new GameActor(actor, actor.getX(), actor.getY(), actor.getRotation(), actor.getX(), actor.getY(), actor.getRotation(), 0);
                     addObject(add, add.getX(), add.getY());
                 }
-
-                GameActor add = new GameActor(actor, actor.getX(), actor.getY(), actor.getRotation(), actor1.getX(), actor1.getY(), actor1.getRotation(), (double) (System.nanoTime() - timeDiff - time1)/timeDiff);
-                addObject(add, add.getX(), add.getY());
+                else {
+                    GameActor add = new GameActor(actor, actor.getX(), actor.getY(), actor.getRotation(), actor1.getX(), actor1.getY(), actor1.getRotation(), (double) (System.nanoTime() - timeDiff - time1) / timeDiff);
+                    addObject(add, add.getX(), add.getY());
+                }
             }
         }
         else if(!updates.isEmpty()){
@@ -71,6 +109,19 @@ public class GameWorld extends World
         }
         else{return;}
 
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+        System.out.println(role+":"+this.role);
+    }
+
+    public void setEnergy(int energy) {
+        this.energy = energy;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     @Override

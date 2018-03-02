@@ -52,6 +52,12 @@ public class ServerWorld extends World
             {
                 server.send(this.toString());
             }
+            if(getObjects(Collectable.class).size()==0)
+            {
+                System.out.println("test");
+                Collectable collectable = new Collectable();
+                addObject(collectable,collectable.getX(),collectable.getY());
+            }
         }
     }
 

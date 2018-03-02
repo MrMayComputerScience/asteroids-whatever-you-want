@@ -38,6 +38,11 @@ public class MultiplayerServer extends Server
     @Override
     public void process(int i, String s)
     {
+        if(s.equals("Role plz"))
+        {
+            send(i,"Role"+":"+inttorole.get(i));
+            return;
+        }
         inttogame.get(i).process(i, s);
     }
 

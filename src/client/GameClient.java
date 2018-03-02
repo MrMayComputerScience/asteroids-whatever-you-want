@@ -10,7 +10,7 @@ public class GameClient extends Client implements GameMode
 {
     private GameWorld gameWorld;
     private Queue<String> serverUpdates;
-
+    private String role;
     public GameClient()
     {
         this("localhost");
@@ -22,20 +22,34 @@ public class GameClient extends Client implements GameMode
         this.connect(ip, 1234);
         System.out.println("Connected");
         serverUpdates = new LinkedList();
+        send("Role plz");
     }
 
     public void setGameWorld(GameWorld world){
+
         this.gameWorld = world;
+        gameWorld.setRole(this.role);
+        System.out.println(role);
     }
 
 
     @Override
     public void process(String s)
     {
+
+        if(s.split(":")[0].equals("Role"))
+        {
+            role =(s.split(":")[1]);
+            System.out.println(s.split(":")[1]);
+            if(gameWorld != null)
+                gameWorld.setRole(role);
+            return;
+        }
         Map<Integer, Actor> actors = new HashMap<>();
         String[] allActors = s.split(",");
         for(String actor : allActors)
         {
+            //System.out.println(actor);
             if(!"".equals(actor)) {
                 String individualActor = actor.split(":")[0];
                 int id;
@@ -47,11 +61,17 @@ public class GameClient extends Client implements GameMode
                         int shipX = Integer.parseInt(shipParams[1]);
                         int shipY = Integer.parseInt(shipParams[2]);
                         int shipR = Integer.parseInt(shipParams[3]);
-
-                        String[] energy = shipParams[4].split("/");
+                        gameWorld.setScore(Integer.parseInt(shipParams[4]));
+                        String[] energy = shipParams[5].split("/");
                         int reserve = Integer.parseInt(energy[0]);
                         int ship = Integer.parseInt(energy[1]);
                         int weapon = Integer.parseInt(energy[2]);
+                        if(role.equals("Engineer"))
+                            gameWorld.setEnergy(reserve);
+                        else if(role.equals("Ship"))
+                            gameWorld.setEnergy(ship);
+                        else
+                            gameWorld.setEnergy(weapon);
                         a = new GameActor("rsrc/SpaceshipNoCannon.png", shipX, shipY, shipR);
                         actors.put(id, a);
                         break;
@@ -63,6 +83,7 @@ public class GameClient extends Client implements GameMode
                         int asteroidY = Integer.parseInt(asteroidParams[3]);
                         int asteroidR = Integer.parseInt(asteroidParams[4]);
 
+
                         if(size.equals("small")){
                             actors.put(id, new GameActor("rsrc/SmallAsteroid.png", asteroidX, asteroidY, asteroidR));
                         }
@@ -71,13 +92,14 @@ public class GameClient extends Client implements GameMode
                         }
 
                         break;
-                    case("collectable"):
+                    case("Collectable"):
                         String[] collectableParams = actor.split(":")[1].split(" ");
                         id = Integer.parseInt(collectableParams[0]);
                         int collectableX = Integer.parseInt(collectableParams[1]);
                         int collectableY = Integer.parseInt(collectableParams[2]);
 
                         actors.put(id, new GameActor("rsrc/Collectable.png", collectableX, collectableY,0));
+                        System.out.println(collectableX+":"+collectableY);
 
                         break;
                     case("lazer"):
@@ -130,5 +152,9 @@ public class GameClient extends Client implements GameMode
 
     public void processRelease(String action) {
 
+    }
+
+    public String getRole() {
+        return role;
     }
 }
