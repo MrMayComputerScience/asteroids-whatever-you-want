@@ -2,7 +2,7 @@ package server;
 
 import mayflower.World;
 
-public class ShipActor extends SpaceObject{
+public class ShipActor extends SpaceObject implements Explodable{
     private SpaceCannon cannon;
     private EngineerSystem engie;
     private int score;
@@ -42,7 +42,9 @@ public class ShipActor extends SpaceObject{
 //                engie.getReserveEnergy(), engie.getShipEnergy(), engie.getCannonEnergy());
     }
 
-
+    public void explode(){
+        //TODO
+    }
 
     public EngineerSystem getEngie() {
         return engie;

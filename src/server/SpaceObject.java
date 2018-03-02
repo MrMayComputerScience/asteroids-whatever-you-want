@@ -19,11 +19,8 @@ public class SpaceObject extends Actor {
         if(angle != 180 && angle != 0){
             angle = -angle;
         }
-        System.out.println("angle = " + angle);
-        angle *= (Math.PI/180);
-        double x = velToAdd * Math.cos(angle);
-        double y = velToAdd * -Math.sin(angle);
-        velocity = velocity.add(new Vector(x,y));
+        Vector accelVec = Vector.fromMagAndAngle(velToAdd, angle);
+        velocity = velocity.add(accelVec);
     }
     public Vector getVelocity(){
         return velocity;

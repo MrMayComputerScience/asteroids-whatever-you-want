@@ -1,5 +1,7 @@
 package server;
 
+import mayflower.Actor;
+
 public class SpaceLaser extends SpaceObject {
     public SpaceLaser() {
         super("rsrc/Laser.png");
@@ -10,8 +12,16 @@ public class SpaceLaser extends SpaceObject {
 
     }
 
-    @Override
-    public void act() {
-        
+    public void act(){
+        for(Actor a : getIntersectingObjects(Actor.class)){
+            if(a instanceof Explodable){
+                Explodable e = (Explodable)a;
+                e.explode();
+                if(getWorld() != null)
+                    getWorld().removeObject(this);
+            }
+
+        }
+
     }
 }

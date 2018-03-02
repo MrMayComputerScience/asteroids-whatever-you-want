@@ -48,7 +48,7 @@ public class ServerWorld extends World
             {
                 double x = actor.getVelocity().getX();
                 double y = actor.getVelocity().getY();
-                actor.setLocation(actor.getX() + x, actor.getY() + y);
+                actor.setLocation(actor.getX() + x, actor.getY() - y);
             }
 
 //            System.out.println("tick: " + this.getObjects().size());
