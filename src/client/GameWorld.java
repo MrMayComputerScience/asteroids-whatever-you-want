@@ -4,6 +4,8 @@ import mayflower.Actor;
 import mayflower.Color;
 import mayflower.World;
 import server.Collectable;
+import server.ShipActor;
+import server.SpaceCannon;
 
 
 import java.util.*;
@@ -29,6 +31,8 @@ public class GameWorld extends World
         time = System.nanoTime();
         energy = 0;
         score = 0;
+        setPaintOrder(SpaceCannon.class, ShipActor.class);
+
     }
 
     public void update(Map<Integer, Actor> actors)
