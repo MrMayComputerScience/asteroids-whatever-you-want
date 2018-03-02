@@ -38,6 +38,11 @@ public class ServerWorld extends World
     {
         if(timer.isDone())
         {
+            if(null != server)
+            {
+                server.send(this.toString());
+            }
+
             List<SpaceObject> actors = getObjects(SpaceObject.class);
             for(SpaceObject actor : actors)
             {
@@ -48,16 +53,13 @@ public class ServerWorld extends World
 
 //            System.out.println("tick: " + this.getObjects().size());
             timer.reset();
-            if(null != server)
-            {
-                server.send(this.toString());
-            }
             if(getObjects(Collectable.class).size()==0)
             {
-                System.out.println("test");
+
                 Collectable collectable = new Collectable();
                 addObject(collectable,collectable.getX(),collectable.getY());
             }
+
         }
     }
 

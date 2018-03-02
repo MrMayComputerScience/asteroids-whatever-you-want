@@ -9,4 +9,9 @@ public class SpaceLaser extends SpaceObject {
 //        return String.format("lazer:%d %d %d", getX(), getY(), getRotation());
 
     }
+
+    @Override
+    public void act() {
+        
+    }
 }

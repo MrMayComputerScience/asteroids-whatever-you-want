@@ -43,7 +43,9 @@ public class MultiplayerServer extends Server
             send(i,"Role"+":"+inttorole.get(i));
             return;
         }
+        System.out.println(i+s);
         inttogame.get(i).process(i, s);
+        System.out.println(s);
     }
 
     @Override
@@ -58,6 +60,7 @@ public class MultiplayerServer extends Server
         if(players.size()>=3){
             lobby = new ServerGame(this);
             for(int j=0; j<3; j++){
+                System.out.println(j);
                 int player = players.remove();
                 lobby.join(player, inttorole.get(player));
                 inttogame.put(player, lobby);

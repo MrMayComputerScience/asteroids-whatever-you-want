@@ -8,7 +8,7 @@ public class Collectable extends SpaceObject
     {
         super("rsrc/Collectable.png");
         do {
-            setLocation(Math.random() * 1024, Math.random() * 768);
+            setLocation(Math.random() * 800, Math.random() * 600);
 
         }while(this.getObjectsInRange(50, ShipActor.class).size()>0);
         setVelocity(0);

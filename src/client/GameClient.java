@@ -23,13 +23,14 @@ public class GameClient extends Client implements GameMode
         System.out.println("Connected");
         serverUpdates = new LinkedList();
         send("Role plz");
+        if(gameWorld != null&&role!=null)
+            gameWorld.setRole(getRole());
     }
 
     public void setGameWorld(GameWorld world){
 
         this.gameWorld = world;
         gameWorld.setRole(this.role);
-        System.out.println(role);
     }
 
 
