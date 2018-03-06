@@ -123,7 +123,7 @@ public class GameClient extends Client implements GameMode
                         int cannonY = Integer.parseInt(cannonParams[2]);
                         int cannonR = Integer.parseInt(cannonParams[3]);
 
-                        actors.put(id, new GameActor("rsrc/LaserCannon.png", cannonX, cannonY, cannonR));
+                        actors.put(id, new PriorityActor("rsrc/LaserCannon.png", cannonX, cannonY, cannonR));
 
                         break;
                     case "debug":

@@ -17,7 +17,7 @@ public class ServerWorld extends World
     public ServerWorld(Server server)
     {
         addObject(new Asteroid(true),10,10);
-        timer = new Timer(30000000);
+        timer = new Timer(300000000);
         this.server = server;
         currId = 1;
     }
@@ -79,6 +79,8 @@ public class ServerWorld extends World
         String str = "";
 
         List<SpaceObject> actors = getObjects(SpaceObject.class);
+        Collections.sort(actors);
+        System.out.println("actors = " + actors);
         for(Actor actor : actors)
         {
             str += actor.toString() + ",";
