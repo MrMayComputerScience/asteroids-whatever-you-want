@@ -33,6 +33,15 @@ public class ShipActor extends SpaceObject implements Explodable{
     public void act() {
         super.act();
         cannon.setLocation(getX(), getY());
+        if(this.isTouching(Asteroid.class)){
+            System.out.println(engie.getTotalEnergy());
+            engie.removeTotalEnergy();
+        }
+        if(engie.getTotalEnergy() <=0){
+            if(getWorld() != null) {
+                getWorld().removeObject(this);
+            }
+        }
     }
 
     public String toString(){

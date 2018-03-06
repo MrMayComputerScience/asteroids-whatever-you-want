@@ -61,7 +61,6 @@ public class GameWorld extends World
         Long time1 = timeOfUpdate.get(actors);
         Long time2 = timeOfUpdate.get(actors1);
         Long timeDiff = time2 - time1;
-//        System.out.println((double) (System.nanoTime() - timeDiff - time1) / timeDiff + " "+time1+" "+time2);
         Set keys = new HashSet();
         for(String s: getTexts().keySet())
             keys.add(s);
@@ -122,7 +121,6 @@ public class GameWorld extends World
 
     public void setRole(String role) {
         this.role = role;
-        System.out.println(role+":"+this.role);
     }
 
     public void setEnergy(int energy) {

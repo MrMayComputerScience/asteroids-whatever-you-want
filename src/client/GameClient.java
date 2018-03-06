@@ -20,7 +20,6 @@ public class GameClient extends Client implements GameMode
     {
         System.out.println("Connecting");
         this.connect(ip, 1234);
-        System.out.println("Connected");
         serverUpdates = new LinkedList();
         send("Role plz");
         if(gameWorld != null&&role!=null)
@@ -48,7 +47,6 @@ public class GameClient extends Client implements GameMode
         if(s.split(":")[0].equals("Role"))
         {
             role =(s.split(":")[1]);
-            System.out.println(s.split(":")[1]);
             if(gameWorld != null)
                 gameWorld.setRole(role);
             return;
@@ -57,7 +55,6 @@ public class GameClient extends Client implements GameMode
         String[] allActors = s.split(",");
         for(String actor : allActors)
         {
-            //System.out.println(actor);
             if(!"".equals(actor)) {
                 String individualActor = actor.split(":")[0];
                 int id;
@@ -107,7 +104,6 @@ public class GameClient extends Client implements GameMode
                         int collectableY = Integer.parseInt(collectableParams[2]);
 
                         actors.put(id, new GameActor("rsrc/Collectable.png", collectableX, collectableY,0));
-                        System.out.println(collectableX+":"+collectableY);
 
                         break;
                     case("lazer"):
