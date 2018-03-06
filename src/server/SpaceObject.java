@@ -44,7 +44,7 @@ public class SpaceObject extends Actor implements Comparable<SpaceObject>{
 
     @Override
     public void act() {
-        if(isAtEdge() && !wasAtEdge){
+        if(needsToMove() && !wasAtEdge){
             int rot = getRotation();
             setRotation(0);
             if(getX() <= 0){
@@ -71,8 +71,10 @@ public class SpaceObject extends Actor implements Comparable<SpaceObject>{
         super.setLocation(x,y);
         setRotation(rot);
     }
-
-
+    public boolean needsToMove(){
+        return (getCenterX() > getWorld().getWidth() || getCenterX() < 0 ||
+                getCenterY() > getWorld().getHeight() || getCenterY() < 0);
+    }
     @Override
     public int compareTo(SpaceObject o) {
         return o.priority - priority;
