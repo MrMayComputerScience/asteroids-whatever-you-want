@@ -7,6 +7,13 @@ public class Asteroid extends SpaceObject implements Explodable
 {
     private boolean isLarge;
 
+    public void act(){
+        super.act();
+        for(SpaceObject a : getIntersectingObjects(SpaceObject.class)){
+            setVelocity(getVelocity().scale(-1));
+        }
+    }
+
     public Asteroid(boolean isBig)
     {
         super(isBig ? "rsrc/LargeAsteroid.png" : "rsrc/SmallAsteroid.png");
@@ -55,11 +62,6 @@ public class Asteroid extends SpaceObject implements Explodable
         Asteroid small = new Asteroid(false);
         int angle = (int)(Math.random() * -360) + 180; //Rand range from -179 to 180
         double mag = momentum.subtract(sysMomentum).magnitude();
-        if(mag < 0){
-            angle -= 180;
-            angle %= 360;
-            mag *= -1;
-        }
         Vector astVel = Vector.fromMagAndAngle(mag, angle+180);
         small.setRotation(angle);
         small.setVelocity(astVel);
