@@ -91,10 +91,12 @@ public class GameWorld extends World {
                     GameActor add = new GameActor(actor, actor.getX(), actor.getY(), actor.getRotation(), actor.getX(), actor.getY(), actor.getRotation(), 0);
                     addObject(add, add.getX(), add.getY());
                 }
+
                 else if(Math.sqrt(Math.pow(actor1.getX() - actor.getX(), 2) + Math.pow(actor1.getY() - actor.getY(), 2)) > 100){
                     GameActor add = new GameActor(actor1, actor1.getX(), actor1.getY(), actor1.getRotation(), actor1.getX(), actor1.getY(), actor1.getRotation(), 0);
                     addObject(add, add.getX(), add.getY());
                 }
+                
                 else {
                     GameActor add = new GameActor(actor, actor.getX(), actor.getY(), actor.getRotation(), actor1.getX(), actor1.getY(), actor1.getRotation(), (double) (System.nanoTime() - timeDiff - time1) / timeDiff);
                     addObject(add, add.getX(), add.getY());
