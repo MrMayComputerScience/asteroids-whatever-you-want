@@ -1,11 +1,13 @@
 package server;
 
+import mayflower.Timer;
 import mayflower.World;
 
 public class ShipActor extends SpaceObject implements Explodable{
     private SpaceCannon cannon;
     private EngineerSystem engie;
     private int score;
+    private Timer immune;
 
 
 
@@ -13,6 +15,7 @@ public class ShipActor extends SpaceObject implements Explodable{
         super("rsrc/SpaceshipNoCannon.png");
         engie = new EngineerSystem();
         cannon = new SpaceCannon(engie);
+        immune = new Timer(2000000000);
 
     }
 
@@ -24,21 +27,25 @@ public class ShipActor extends SpaceObject implements Explodable{
     @Override
     protected void addedToWorld(World world) {
         super.addedToWorld(world);
-        world.addObject(cannon, getX(), getY());
-        world.addObject(engie, getX(), getY());
-
+        if(world != null) {
+            world.addObject(cannon, getX(), getY());
+            world.addObject(engie, getX(), getY());
+        }
     }
 
     @Override
     public void act() {
         super.act();
         cannon.setLocation(getX(), getY());
-        if(this.isTouching(Asteroid.class)){
+        if(this.isTouching(Asteroid.class)&&immune.isDone()){
             System.out.println(engie.getTotalEnergy());
             engie.removeTotalEnergy();
+            immune.reset();
         }
         if(engie.getTotalEnergy() <=0){
             if(getWorld() != null) {
+                getWorld().removeObject(cannon);
+                getWorld().removeObject(engie);
                 getWorld().removeObject(this);
             }
         }

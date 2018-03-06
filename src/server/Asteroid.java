@@ -9,12 +9,19 @@ public class Asteroid extends SpaceObject implements Explodable
     @Override
     public void act()
     {
-
+        if(this.isTouching(ShipActor.class)){
+            if(isLarge) {
+                explode();
+            }
+            else{
+                getWorld().removeObject(this);
+            }
+        }
     }
 
     public Asteroid(boolean isBig)
     {
-        super(isBig ? "rsrc/LargeAsteroid.png" : "rsrc/LargeAsteroid.png");
+        super(isBig ? "rsrc/LargeAsteroid.png" : "rsrc/SmallAsteroid.png");
         isLarge = isBig;
         Vector velocity = new Vector((int)Math.random()*10, (int)Math.random()*10);
         setVelocity(velocity);
