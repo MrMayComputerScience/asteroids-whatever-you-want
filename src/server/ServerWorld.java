@@ -17,7 +17,7 @@ public class ServerWorld extends World
     public ServerWorld(Server server)
     {
         addObject(new Asteroid(true),10,10);
-        timer = new Timer(300000000);
+        timer = new Timer(30000000);
         this.server = server;
         currId = 1;
     }
@@ -25,12 +25,21 @@ public class ServerWorld extends World
     @Override
     public void addObject(Actor a, int x, int y)
     {
-        super.addObject(a, x, y);
-        if(a instanceof SpaceObject){
-            SpaceObject o = (SpaceObject)a;
-            o.setId(currId++); //Postfix so it uses initial value
+        synchronized(this){
+            super.addObject(a, x, y);
+            if(a instanceof SpaceObject){
+                SpaceObject o = (SpaceObject)a;
+                o.setId(currId++); //Postfix so it uses initial value
+            }
+            System.out.println("Adding: "+ a + " to " + x +", " + y);
         }
-        System.out.println("Adding: "+ a + " to " + x +", " + y);
+    }
+
+    @Override
+    public void removeObject(Actor object) {
+        synchronized (this){
+            super.removeObject(object);
+        }
     }
 
     @Override
@@ -38,22 +47,32 @@ public class ServerWorld extends World
     {
         if(timer.isDone())
         {
+            if(null != server)
+            {
+                server.send(this.toString());
+            }
+
             List<SpaceObject> actors = getObjects(SpaceObject.class);
             for(SpaceObject actor : actors)
             {
                 double x = actor.getVelocity().getX();
                 double y = actor.getVelocity().getY();
-                actor.setLocation(actor.getX() + x, actor.getY() + y);
+                actor.setLocation(actor.getX() + x, actor.getY() - y);
             }
 
 //            System.out.println("tick: " + this.getObjects().size());
             timer.reset();
-            if(null != server)
+            if(getObjects(Collectable.class).size()==0)
             {
-                server.send(this.toString());
+
+                Collectable collectable = new Collectable();
+                addObject(collectable,collectable.getX(),collectable.getY());
             }
+
         }
     }
+
+
 
     public String toString()
     {
