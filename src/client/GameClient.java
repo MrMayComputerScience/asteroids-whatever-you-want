@@ -37,6 +37,11 @@ public class GameClient extends Client implements GameMode
     @Override
     public void process(String s)
     {
+        if(gameWorld != null&&role!=null)
+        {
+            send("Role plz");
+            gameWorld.setRole(getRole());
+        }
         if(gameWorld!=null&&gameWorld.getRole() == null)
             gameWorld.setRole(role);
 
