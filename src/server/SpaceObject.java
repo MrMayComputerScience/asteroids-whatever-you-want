@@ -59,8 +59,16 @@ public class SpaceObject extends Actor implements Comparable<SpaceObject>{
                 setLocation(getX(), 0);
             }
             setRotation(rot);
-            while(isAtEdge())
+            int count = 0;
+            while(isAtEdge()){
+                System.out.println("Loc Beofre: "+getX() + ", " + getY());
                 move(5);
+                System.out.println("Loc After: "+getX() + ", " + getY());
+                if(++count >= 10){
+                    break;
+                }
+            }
+
         }
     }
     public void setLocation(double x, double y){
