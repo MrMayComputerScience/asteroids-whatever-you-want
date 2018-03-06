@@ -3,14 +3,23 @@ package server;
 import mayflower.Actor;
 import mayflower.Direction;
 
-public class SpaceObject extends Actor {
+public class SpaceObject extends Actor implements Comparable<SpaceObject>{
     private Vector velocity;
     private int id;
+    protected int priority;
+    private boolean wasAtEdgeX;
+    private boolean wasAtEdgeY;
 
     public SpaceObject(String img){
         setImage(img);
         velocity = Vector.ZERO;
+        priority = Integer.MAX_VALUE;
     }
+
+    public int getPriority() {
+        return priority;
+    }
+
 
     public void setVelocity(Vector velocity){
         this.velocity = velocity;
@@ -36,22 +45,28 @@ public class SpaceObject extends Actor {
 
     @Override
     public void act() {
-        if(isAtEdge()){
+        if(needsToMoveX() && !wasAtEdgeX){
             int rot = getRotation();
             setRotation(0);
-            if(getX() <= 0){
+            if(getX() < 0){
                 setLocation(getWorld().getWidth(), getY());
             }
-            else if(getX()+getImage().getWidth() >= getWorld().getWidth()){
+            else if(getX()+getImage().getWidth() > getWorld().getWidth()){
                 setLocation(0,getY());
             }
-            else if(getY() <= 0){
+            setRotation(rot);
+            wasAtEdgeX = true;
+        }
+        else if(!needsToMoveX() && wasAtEdgeX){
+            wasAtEdgeX = false;
+        }
+        if(needsToMoveY() && !wasAtEdgeY){
+            if(getY() < 0){
                 setLocation(getX(), getWorld().getHeight() - getImage().getHeight());
             }
-            else if(getY()+getImage().getHeight() >= getWorld().getHeight()){
+            else if(getY()+getImage().getHeight() > getWorld().getHeight()){
                 setLocation(getX(), 0);
             }
-            setRotation(rot);
         }
     }
     public void setLocation(double x, double y){
@@ -59,6 +74,14 @@ public class SpaceObject extends Actor {
         super.setLocation(x,y);
         setRotation(rot);
     }
-
-
+    public boolean needsToMoveX(){
+        return getCenterX() > getWorld().getWidth() || getCenterX() < 0;
+    }
+    boolean needsToMoveY(){
+        return getCenterY() > getWorld().getHeight() || getCenterY() < 0;
+    }
+    @Override
+    public int compareTo(SpaceObject o) {
+        return o.priority - priority;
+    }
 }

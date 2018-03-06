@@ -1,6 +1,7 @@
 package client;
 
 import mayflower.Actor;
+import server.ShipActor;
 
 public class GameActor extends Actor
 {
@@ -22,7 +23,6 @@ public class GameActor extends Actor
         setImage(actor.getImage());
         setLocation(x, y);
         setRotation(r);
-
     }
 
     public String toString()

@@ -79,6 +79,8 @@ public class ServerWorld extends World
         String str = "";
 
         List<SpaceObject> actors = getObjects(SpaceObject.class);
+        Collections.sort(actors);
+        System.out.println("actors = " + actors);
         for(Actor actor : actors)
         {
             str += actor.toString() + ",";
