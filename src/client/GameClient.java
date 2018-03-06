@@ -22,9 +22,7 @@ public class GameClient extends Client implements GameMode
         this.connect(ip, 1234);
         System.out.println("Connected");
         serverUpdates = new LinkedList();
-        send("Role plz");
-        if(gameWorld != null&&role!=null)
-            gameWorld.setRole(getRole());
+
     }
 
     public void setGameWorld(GameWorld world){
@@ -37,22 +35,12 @@ public class GameClient extends Client implements GameMode
     @Override
     public void process(String s)
     {
-        if(gameWorld != null&&role!=null)
+        if(gameWorld != null&&gameWorld.getRole()==null)
         {
-            send("Role plz");
             gameWorld.setRole(getRole());
         }
-        if(gameWorld!=null&&gameWorld.getRole() == null)
-            gameWorld.setRole(role);
 
-        if(s.split(":")[0].equals("Role"))
-        {
-            role =(s.split(":")[1]);
-            System.out.println(s.split(":")[1]);
-            if(gameWorld != null)
-                gameWorld.setRole(role);
-            return;
-        }
+
         Map<Integer, Actor> actors = new HashMap<>();
         String[] allActors = s.split(",");
         for(String actor : allActors)
@@ -107,7 +95,7 @@ public class GameClient extends Client implements GameMode
                         int collectableY = Integer.parseInt(collectableParams[2]);
 
                         actors.put(id, new GameActor("rsrc/Collectable.png", collectableX, collectableY,0));
-                        System.out.println(collectableX+":"+collectableY);
+
 
                         break;
                     case("lazer"):
@@ -132,6 +120,7 @@ public class GameClient extends Client implements GameMode
                         break;
                     case "debug":
                         System.out.println("DEBUG MSG FROM SERVER: "+actor.split(":")[1]);
+                        role = actor.split(":")[1];
                         break;
                 }
             }

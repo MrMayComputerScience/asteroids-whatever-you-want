@@ -32,7 +32,9 @@ public class GameWorld extends World
         energy = 0;
         score = 0;
         setPaintOrder(SpaceCannon.class, ShipActor.class);
-
+        setBackground("rsrc/Space.jpg");
+        actors = new HashMap<>();
+        actors1 = new HashMap<>();
     }
 
     public void update(Map<Integer, Actor> actors)
@@ -60,6 +62,8 @@ public class GameWorld extends World
 
         Long time1 = timeOfUpdate.get(actors);
         Long time2 = timeOfUpdate.get(actors1);
+        if(time1==null||time2==null)
+            return;
         Long timeDiff = time2 - time1;
 //        System.out.println((double) (System.nanoTime() - timeDiff - time1) / timeDiff + " "+time1+" "+time2);
         Set keys = new HashSet();
@@ -112,17 +116,17 @@ public class GameWorld extends World
             removeObjects(objects);
 
         }
-        else if(!updates.isEmpty()){
+        /*else if(!updates.isEmpty()){
             actors = actors1;
             actors1 = updates.remove();
-        }
+        }*/
         else{return;}
 
     }
 
     public void setRole(String role) {
         this.role = role;
-        System.out.println(role+":"+this.role);
+
     }
 
     public void setEnergy(int energy) {
@@ -137,7 +141,11 @@ public class GameWorld extends World
     public void act()
     {
         im.scan();
-        redraw();
+        if(!updates.isEmpty()) {
+            actors = actors1;
+            actors1 = updates.remove();
+            redraw();
+        }
     }
 
     public String getRole() {
