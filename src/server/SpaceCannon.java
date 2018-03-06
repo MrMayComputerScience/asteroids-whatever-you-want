@@ -17,8 +17,7 @@ public class SpaceCannon extends SpaceObject{
             //Add the laser at our center TODO Fix it
             getWorld().addObject(laser, getCenterX(), getCenterY());
             laser.setRotation(getRotation());
-            laser.accelerate(10, getRotation());//TODO: Find good way to do energy-based velocity(???)
-            laser.move(10); //TODO: Get good radius to fire from
+            laser.accelerate(80, getRotation());//TODO: Find good way to do energy-based velocity(???)
             return laser;
         }
         else{
