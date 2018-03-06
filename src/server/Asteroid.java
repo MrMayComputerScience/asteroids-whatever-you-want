@@ -10,7 +10,9 @@ public class Asteroid extends SpaceObject implements Explodable
     public void act(){
         super.act();
         for(SpaceObject a : getIntersectingObjects(SpaceObject.class)){
-            setVelocity(getVelocity().scale(-1));
+            a.setVelocity(a.getVelocity().scale(-1));
+            int rot = a.getRotation();
+            a.setRotation((rot-180)%180);
         }
     }
 
@@ -18,7 +20,7 @@ public class Asteroid extends SpaceObject implements Explodable
     {
         super(isBig ? "rsrc/LargeAsteroid.png" : "rsrc/SmallAsteroid.png");
         isLarge = isBig;
-        Vector velocity = new Vector((int)Math.random()*10, (int)Math.random()*10);
+        Vector velocity = new Vector((int)(Math.random()*10), (int)(Math.random())*10);
         setVelocity(velocity);
     }
 
