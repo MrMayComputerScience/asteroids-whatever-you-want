@@ -6,15 +6,10 @@ import java.util.List;
 public class Asteroid extends SpaceObject implements Explodable
 {
     private boolean isLarge;
-    @Override
-    public void act()
-    {
-
-    }
 
     public Asteroid(boolean isBig)
     {
-        super(isBig ? "rsrc/LargeAsteroid.png" : "rsrc/LargeAsteroid.png");
+        super(isBig ? "rsrc/LargeAsteroid.png" : "rsrc/SmallAsteroid.png");
         isLarge = isBig;
         Vector velocity = new Vector((int)Math.random()*10, (int)Math.random()*10);
         setVelocity(velocity);
@@ -42,15 +37,13 @@ public class Asteroid extends SpaceObject implements Explodable
                 getWorld().addObject(a, getCenterX(), getCenterY());
             }
         }
-        else{
-            getWorld().removeObject(this);
-        }
+        getWorld().removeObject(this);
     }
 
     private Asteroid makeSmallExplodedAsteroid(Vector momentum){
         Asteroid small = new Asteroid(false);
         int angle = (int)(Math.random() * -360) + 180; //Rand range from -179 to 180
-        double mag = Math.random() * momentum.magnitude();
+        double mag = Math.random() * momentum.magnitude() + 10;
         //Add 180 to the angle to convert from mayflower angle to a regular angle
         Vector astVel = Vector.fromMagAndAngle(mag, angle+180);
         small.setRotation(angle);

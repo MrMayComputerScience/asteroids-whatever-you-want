@@ -6,6 +6,7 @@ public class SpaceCannon extends SpaceObject{
         super("rsrc/LaserCannon.png");
         this.engie = engie;
         setVelocity(Vector.ZERO);
+        priority = 0;
     }
     public void act(){
         //No-op

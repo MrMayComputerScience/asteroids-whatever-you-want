@@ -3,14 +3,21 @@ package server;
 import mayflower.Actor;
 import mayflower.Direction;
 
-public class SpaceObject extends Actor {
+public class SpaceObject extends Actor implements Comparable<SpaceObject>{
     private Vector velocity;
     private int id;
+    protected int priority;
 
     public SpaceObject(String img){
         setImage(img);
         velocity = Vector.ZERO;
+        priority = Integer.MAX_VALUE;
     }
+
+    public int getPriority() {
+        return priority;
+    }
+
 
     public void setVelocity(Vector velocity){
         this.velocity = velocity;
@@ -52,6 +59,8 @@ public class SpaceObject extends Actor {
                 setLocation(getX(), 0);
             }
             setRotation(rot);
+            while(isAtEdge())
+                move(5);
         }
     }
     public void setLocation(double x, double y){
@@ -61,4 +70,8 @@ public class SpaceObject extends Actor {
     }
 
 
+    @Override
+    public int compareTo(SpaceObject o) {
+        return o.priority - priority;
+    }
 }

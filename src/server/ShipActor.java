@@ -13,7 +13,7 @@ public class ShipActor extends SpaceObject implements Explodable{
         super("rsrc/SpaceshipNoCannon.png");
         engie = new EngineerSystem();
         cannon = new SpaceCannon(engie);
-
+        priority = 1;
     }
 
     public SpaceCannon getCannon() {
@@ -44,6 +44,7 @@ public class ShipActor extends SpaceObject implements Explodable{
 
     public void explode(){
         //TODO
+        System.out.println("EXPLODE!!");
     }
 
     public EngineerSystem getEngie() {

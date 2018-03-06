@@ -17,9 +17,9 @@ public class SpaceLaser extends SpaceObject {
     public void act(){
         super.act();
         //Should always work. Dont start lasers when theyre not on their ships
-        if(dad == null)
+        if(dad == null && !getIntersectingObjects(ShipActor.class).isEmpty())
             dad = getIntersectingObjects(ShipActor.class).get(0);
-        while(!isGoodToGo){
+        while(!isGoodToGo && dad != null){
             if(getBounds().intersects(dad.getBounds().getBounds()))
                 move(10);
             else
