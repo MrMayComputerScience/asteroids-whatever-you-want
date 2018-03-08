@@ -6,14 +6,20 @@ import java.util.List;
 public class Asteroid extends SpaceObject implements Explodable
 {
     private boolean isLarge;
+    private List<SpaceObject> collided;
 
     public void act(){
         super.act();
-        for(SpaceObject a : getIntersectingObjects(SpaceObject.class)){
-            a.setVelocity(a.getVelocity().scale(-1));
-            int rot = a.getRotation();
-            a.setRotation((rot-180)%180);
+        List<SpaceObject> list = getIntersectingObjects(SpaceObject.class);
+        for(SpaceObject a : list){
+            if(collided.contains(a)){
+                a.setVelocity(a.getVelocity().scale(-1));
+                System.out.println("Bouncing");
+                int rot = a.getRotation();
+                a.setRotation((rot-180)%180);
+            }
         }
+        collided = list;
     }
 
     public Asteroid(boolean isBig)
