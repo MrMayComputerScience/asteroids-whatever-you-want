@@ -20,7 +20,6 @@ public class GameClient extends Client implements GameMode
     {
         System.out.println("Connecting");
         this.connect(ip, 1234);
-        System.out.println("Connected");
         serverUpdates = new LinkedList();
 
     }
@@ -41,11 +40,18 @@ public class GameClient extends Client implements GameMode
         }
 
 
+        if(s.split(":")[0].equals("Role"))
+        {
+            role =(s.split(":")[1]);
+            if(gameWorld != null)
+                gameWorld.setRole(role);
+            return;
+        }
+
         Map<Integer, Actor> actors = new HashMap<>();
         String[] allActors = s.split(",");
         for(String actor : allActors)
         {
-            //System.out.println(actor);
             if(!"".equals(actor)) {
                 String individualActor = actor.split(":")[0];
                 int id;

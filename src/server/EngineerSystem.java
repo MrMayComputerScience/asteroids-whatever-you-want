@@ -50,6 +50,16 @@ public class EngineerSystem extends Actor{
         }
     }
     public int getReserveEnergy(){
+        if(totalEnergy - cannonEnergy - shipEnergy < 0){
+            int random = (int) Math.random()*2;
+            if(random == 0){
+                cannonEnergy--;
+            }
+            else{
+                shipEnergy--;
+            }
+            return 0;
+        }
         return totalEnergy - cannonEnergy - shipEnergy;
     }
 
@@ -57,4 +67,6 @@ public class EngineerSystem extends Actor{
     {
         totalEnergy--;
     }
+
+    public int getTotalEnergy(){return totalEnergy;}
 }

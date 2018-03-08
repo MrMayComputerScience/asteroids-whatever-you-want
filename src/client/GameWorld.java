@@ -30,10 +30,10 @@ public class GameWorld extends World {
         energy = 0;
         score = 0;
 
-        setPaintOrder(SpaceCannon.class, ShipActor.class);
+
+
         setBackground("rsrc/Space.jpg");
-        actors = new HashMap<>();
-        actors1 = new HashMap<>();
+
         setPaintOrder(PriorityActor.class, GameActor.class);
 
     }
@@ -64,7 +64,6 @@ public class GameWorld extends World {
         if (time1 == null || time2 == null)
             return;
         Long timeDiff = time2 - time1;
-//        System.out.println((double) (System.nanoTime() - timeDiff - time1) / timeDiff + " "+time1+" "+time2);
         Set keys = new HashSet();
         for (String s : getTexts().keySet())
             keys.add(s);
@@ -98,7 +97,14 @@ public class GameWorld extends World {
                 if (actor1 == null) {
                     GameActor add = new GameActor(actor, actor.getX(), actor.getY(), actor.getRotation(), actor.getX(), actor.getY(), actor.getRotation(), 0);
                     addObject(add, add.getX(), add.getY());
-                } else {
+                }
+
+                else if(Math.sqrt(Math.pow(actor1.getX() - actor.getX(), 2) + Math.pow(actor1.getY() - actor.getY(), 2)) > 100){
+                    GameActor add = new GameActor(actor1, actor1.getX(), actor1.getY(), actor1.getRotation(), actor1.getX(), actor1.getY(), actor1.getRotation(), 0);
+                    addObject(add, add.getX(), add.getY());
+                }
+                
+                else {
                     GameActor add = new GameActor(actor, actor.getX(), actor.getY(), actor.getRotation(), actor1.getX(), actor1.getY(), actor1.getRotation(), (double) (System.nanoTime() - timeDiff - time1) / timeDiff);
                     addObject(add, add.getX(), add.getY());
                 }
@@ -122,8 +128,6 @@ public class GameWorld extends World {
 
     public void setRole(String role) {
         this.role = role;
-
-
     }
 
     public void setEnergy(int energy) {

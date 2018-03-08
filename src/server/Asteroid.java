@@ -20,13 +20,23 @@ public class Asteroid extends SpaceObject implements Explodable
             }
         }
         collided = list;
+        if(this.isTouching(ShipActor.class)){
+            if(isLarge) {
+                explode();
+            }
+            else{
+                getWorld().removeObject(this);
+            }
+        }
     }
+    
+
 
     public Asteroid(boolean isBig)
     {
         super(isBig ? "rsrc/LargeAsteroid.png" : "rsrc/SmallAsteroid.png");
         isLarge = isBig;
-        Vector velocity = new Vector((int)(Math.random()*10), (int)(Math.random())*10);
+        Vector velocity = new Vector((int)(Math.random()*10), (int)(Math.random()*10));
         setVelocity(velocity);
     }
 

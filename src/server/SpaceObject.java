@@ -45,8 +45,8 @@ public class SpaceObject extends Actor implements Comparable<SpaceObject>{
 
     @Override
     public void act() {
+        int rot = getRotation();
         if(needsToMoveX() && !wasAtEdgeX){
-            int rot = getRotation();
             setRotation(0);
             if(getX() < 0){
                 setLocation(getWorld().getWidth(), getY());
@@ -67,6 +67,8 @@ public class SpaceObject extends Actor implements Comparable<SpaceObject>{
             else if(getY()+getImage().getHeight() > getWorld().getHeight()){
                 setLocation(getX(), 0);
             }
+            setRotation(rot);
+            int count = 0;
         }
     }
     public void setLocation(double x, double y){
