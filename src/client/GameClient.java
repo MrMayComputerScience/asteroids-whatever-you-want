@@ -129,6 +129,11 @@ public class GameClient extends Client implements GameMode
                         break;
                     case "debug":
                         System.out.println("DEBUG MSG FROM SERVER: "+actor.split(":")[1]);
+                        role = actor.split(":")[1];
+                        if(gameWorld!=null)
+                        {
+                            gameWorld.setRole(role);
+                        }
                         break;
                 }
             }
