@@ -28,6 +28,7 @@ public class GameWorld extends World {
         energy = 0;
         score = 0;
         setPaintOrder(PriorityActor.class, GameActor.class);
+        setBackground("rsrc/Space.jpg");
     }
 
     public void update(Map<Integer, Actor> actors) {

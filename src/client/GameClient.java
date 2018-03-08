@@ -64,17 +64,19 @@ public class GameClient extends Client implements GameMode
                         int shipX = Integer.parseInt(shipParams[1]);
                         int shipY = Integer.parseInt(shipParams[2]);
                         int shipR = Integer.parseInt(shipParams[3]);
-                        gameWorld.setScore(Integer.parseInt(shipParams[4]));
-                        String[] energy = shipParams[5].split("/");
-                        int reserve = Integer.parseInt(energy[0]);
-                        int ship = Integer.parseInt(energy[1]);
-                        int weapon = Integer.parseInt(energy[2]);
-                        if(role.equals("Engineer"))
-                            gameWorld.setEnergy(reserve);
-                        else if(role.equals("Ship"))
-                            gameWorld.setEnergy(ship);
-                        else
-                            gameWorld.setEnergy(weapon);
+                        if(gameWorld!=null) {
+                            gameWorld.setScore(Integer.parseInt(shipParams[4]));
+                            String[] energy = shipParams[5].split("/");
+                            int reserve = Integer.parseInt(energy[0]);
+                            int ship = Integer.parseInt(energy[1]);
+                            int weapon = Integer.parseInt(energy[2]);
+                            if (role.equals("Engineer"))
+                                gameWorld.setEnergy(reserve);
+                            else if (role.equals("Ship"))
+                                gameWorld.setEnergy(ship);
+                            else
+                                gameWorld.setEnergy(weapon);
+                        }
                         a = new GameActor("rsrc/SpaceshipNoCannon.png", shipX, shipY, shipR);
                         actors.put(id, a);
                         break;
